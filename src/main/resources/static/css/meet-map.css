@@ -1,0 +1,53 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+
+#mapid{
+    height: 80%;
+    margin: 50px;
+    margin-top: 0px;
+}
+
+h1 {
+    border: black;
+}
+
+.title {
+    text-align: center;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title h1 {
+    margin-top: 30px;
+    margin-bottom: -30px;
+    text-align: center;
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: #2c3e5036;
+    background-image: url(https://res.cloudinary.com/drcrre4xg/image/upload/v1571101002/water_zvupjx.png);
+    -webkit-background-clip: text;
+    animation: water 15s infinite;
+}
+
+@keyframes water {
+    from {
+        background-position: left 0 top 40%;
+    }
+    to {
+        background-position: left 1000px top 20%;
+    }
+}
+
+/*Hello
+Copyright (c) 2023 by ♡Nehitha⁷♡ (https://codepen.io/Nehitha-BTS/pen/vYZwBop)*/

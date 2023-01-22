@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Meet</title>
+    <!--    css    -->
+    <link rel="stylesheet" th:href="#{meetMapCss}">
     <!--    js 라이브러리의 css    -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
           integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
@@ -18,20 +20,10 @@
             integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
             crossorigin=""></script>
 
-
-    <style>
-        html,body {
-            height: 100%;
-        }
-        #mapid{
-            height: 80%;
-            margin: 50px;
-        }
-    </style>
 </head>
 <body>
+<div class="title"><h1>혹시 올사람?</h1></div>
 <div id="mapid"></div>
-<!--<input type="hidden" id="markLocation" name="markLocation" value="">-->
 <input type="hidden" id="markLocationLat" name="markLocationLat" value="">
 <input type="hidden" id="markLocationLng" name="markLocationLng" value="">
 <script th:src="|#{meetMapJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>

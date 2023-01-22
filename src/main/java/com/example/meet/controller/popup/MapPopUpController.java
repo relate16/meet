@@ -38,7 +38,7 @@ public class MapPopUpController {
 
         Mark mark = new Mark(markDto.getUsername(), markDto.getGender(), markDto.getAge(),
                 markDto.getCharacter(), markDto.getPlace(), markDto.getLat(), markDto.getLng(),
-                markStartTime, markEndTime, markDto.getContents());
+                markStartTime, markEndTime, markDto.getContents(), markDto.getParticipant());
         markRepository.save(mark);
 
         // ajax에서 markDto.startDay markDto.endDay를 계산해서 넘겨주지 않으므로

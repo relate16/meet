@@ -14,6 +14,11 @@ function init(){
         // data: JSON.stringify(params),
         success : function (data, status) {
             for (const markDto of data) {
+                console.log("success markDto = " + JSON.stringify(markDto));
+                if (markDto.participant == null) {
+                    markDto.participant = 0;
+                }
+                console.log("after if markDto = " + JSON.stringify(markDto));
                 insertMark(markDto);
             }
             // alert(status);
@@ -39,13 +44,15 @@ function insertMark(markDto) {
         <b>성별 : ${markDto.gender}</b><br>
         <b>나이 : ${markDto.age}</b><br>
         <b>성격 : ${markDto.character}</b><br>
+        <b>장소 : ${markDto.place}</b><br>
         <b>머무는 시간 :</b><br>
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         <b> ${markDto.startYMD} ${markDto.startTime} 부터</b><br>
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         <b>${markDto.endYMD} ${markDto.endTime} 까지</b><br>
         <b>내용 :</b><br>
-        <b style="word-break: break-all">${markDto.contents}</b><br>
+        <div style="width: 220px; word-break: break-all; border: ridge;"><b>${markDto.contents}</b></div>
+        <b>올 수도 있는 사람: ${markDto.participant} 명</b><br>
         <input type='button' value='참석'/>`).openPopup();
 
 }

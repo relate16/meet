@@ -40,7 +40,10 @@ public class Mark {
 
     private String contents;
 
-    public Mark(String username, String gender, String age, String character, String place, String lat, String lng, LocalDateTime startTime, LocalDateTime endTime, String contents) {
+    private Integer participant;
+
+    public Mark(String username, String gender, String age, String character, String place, String lat, String lng,
+                LocalDateTime startTime, LocalDateTime endTime, String contents, Integer participant) {
         this.username = username;
         this.gender = gender;
         this.age = age;
@@ -51,5 +54,6 @@ public class Mark {
         this.startTime = startTime;
         this.endTime = endTime;
         this.contents = contents;
+        this.participant = participant;
     }
 }

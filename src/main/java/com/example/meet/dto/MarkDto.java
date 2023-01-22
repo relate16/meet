@@ -49,4 +49,7 @@ public class MarkDto {
 
     @Column(length = 200)
     private String contents;
+
+    private Integer participant;
+
 }

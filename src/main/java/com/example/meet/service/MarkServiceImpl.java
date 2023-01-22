@@ -27,7 +27,7 @@ public class MarkServiceImpl implements MarkService {
                 mark.getId(), mark.getUsername(), mark.getGender(),
                 mark.getAge(), mark.getCharacter(), mark.getPlace(), mark.getLat(), mark.getLng(),
                 startYMD, endYMD,
-                startTime, endTime, mark.getContents());
+                startTime, endTime, mark.getContents(), mark.getParticipant());
         return markDto;
     }
 
@@ -46,10 +46,9 @@ public class MarkServiceImpl implements MarkService {
             String endYMD = getEndDay(mark);
 
             MarkDto markDto = new MarkDto(
-                    mark.getId(), mark.getUsername(), mark.getGender(), mark.getPlace(),
-                    mark.getAge(), mark.getCharacter(), mark.getLat(), mark.getLng(),
-                    startYMD, endYMD,
-                    startTime, endTime, mark.getContents()
+                    mark.getId(), mark.getUsername(), mark.getGender(), mark.getAge(),
+                    mark.getCharacter(), mark.getPlace(), mark.getLat(), mark.getLng(),
+                    startYMD, endYMD, startTime, endTime, mark.getContents(), mark.getParticipant()
             );
 
             markDtos.add(markDto);
