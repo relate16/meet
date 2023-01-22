@@ -1,0 +1,55 @@
+package com.example.meet.entity;
+
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
+public class Mark {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String username;
+
+    private String gender;
+    private String age;
+    private String character;
+
+    private String place;
+
+    //위도
+    private String lat;
+
+    //경도
+    private String lng;
+
+    private LocalDateTime startTime; // 2023-01-21 00:00:01.702103
+    private LocalDateTime endTime; // 2023-01-21 00:00:01.702103
+
+    private String contents;
+
+    public Mark(String username, String gender, String age, String character, String place, String lat, String lng, LocalDateTime startTime, LocalDateTime endTime, String contents) {
+        this.username = username;
+        this.gender = gender;
+        this.age = age;
+        this.character = character;
+        this.place = place;
+        this.lat = lat;
+        this.lng = lng;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.contents = contents;
+    }
+}

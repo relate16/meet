@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Meet 등록</title>
+  <!--    js 라이브러리의 css    -->
+  <link th:href="|#{registMarkCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" rel="stylesheet" type="text/css">
+<!--  <link href="css/lib/md-time-picker.css" rel="stylesheet">-->
+  <link th:href="|#{mdTimePickerCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" rel="stylesheet">
+
+  <!--    js 라이브러리    -->
+  <script
+          src="https://code.jquery.com/jquery-3.6.3.min.js"
+          integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+          crossorigin="anonymous"></script>
+  <script th:src="|#{mdTimepicker}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>
+
+</head>
+<body>
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+  <div><span th:text="소소한만남"></span></div><br>
+  <div th:text="${#temporals.format(localDateTime,'yyyy-MM-dd')}">날짜</div>
+<!--  <div id ="currentTime" name="currentTime" th:text="${#temporals.format(localDateTime,'yyyy-MM-dd')}">날짜</div>-->
+</div>
+<br>
+<div class="login">
+
+  <label for="username">이름 :&nbsp</label>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <input type="text" placeholder="이름" id="username" name="username"><br><br>
+
+  <label>성별 :&nbsp</label>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <label><input type="radio" value="male" name="gender">남</label>
+  <label><input type="radio" value="female" name="gender">여</label>
+  <label><input type="radio" value="etc" name="gender">기타</label><br><br>
+
+  <label>나이대 :&nbsp</label>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <label><input type="radio" value="18~24" name="age">만 18~24세</label>
+  <label><input type="radio" value="25~29" name="age">만 25~29세</label>
+  <label><input type="radio" value="30~34" name="age">만 30~34세</label>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <label><input type="radio" value="35~39" name="age">만 35~39세</label>
+  <label><input type="radio" value="40~44" name="age">만 40~44세</label>
+  <label><input type="radio" value="45~49" name="age">만 45~49세</label>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <label><input type="radio" value="50~54" name="age">만 50~54세</label>
+  <label><input type="radio" value="55~59" name="age">만 55~60세</label><br><br>
+
+  <label for="character">성격 :&nbsp</label>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <input type="text" placeholder="예: 차분함" id="character" name="character"><br><br>
+
+  <label for="place">장소 :&nbsp</label>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <input type="text" placeholder="예: 카페(2층)" id="place" name="place"><br><br>
+
+  <label>머무는시간 :&nbsp</label>
+  <input type="text" id="startTime" name="startTime" placeholder="도착 시간(클릭)" onfocus="initMdTimePicker()"/>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  ~<br>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <input type="text" id="endTime" name="endTime" placeholder="떠나는 시간(클릭)" onfocus="initMdTimePicker()"/><br><br>
+  <label for="contents">하고 싶은 말 :&nbsp</label><br>
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <textarea placeholder="하고 싶은 말" id="contents" name="contents"></textarea><br><br>
+
+  <input type="button" value="등록" onclick="insertMark()"> <input type="button" value="취소" onclick="windowClose()">
+
+</div>
+<script th:src="|#{registMarkJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" ></script>
+</body>
+</html>
+
+
+
+
+<!--Copyright (c) 2023 by Lennart Hase (https://codepen.io/motorlatitude/pen/abNzbY)-->
