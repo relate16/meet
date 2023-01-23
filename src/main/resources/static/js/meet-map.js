@@ -39,6 +39,10 @@ function insertMark(markDto) {
     console.log("markDto = " + JSON.stringify(markDto));
     const markLocation = [markDto.lat, markDto.lng];
     var marker = L.marker(markLocation).addTo(map);
+    if (markDto.participant == null) {
+        markDto.participant = 0;
+    }
+
     marker.bindPopup(
         `<b>이름 : ${markDto.username}</b><br>
         <b>성별 : ${markDto.gender}</b><br>
@@ -53,9 +57,40 @@ function insertMark(markDto) {
         <b>내용 :</b><br>
         <div style="width: 220px; word-break: break-all; border: ridge;"><b>${markDto.contents}</b></div>
         <b>올 수도 있는 사람: ${markDto.participant} 명</b><br>
-        <input type='button' value='참석'/>`).openPopup();
+        <input type='button' value='참석' onclick="participate(${markDto.id})"/>`).openPopup();
 
 }
+
+/**
+ * 올 수도 있는 사람 인원 추가
+ */
+function participate(markId) {
+    const boolean = confirm("참석하시겠습니까?");
+
+    if (boolean) {
+        $.ajax({
+            type: "post",
+            url: "/update-mark",
+            async: false,
+            contentType: 'application/json',
+            dataType: "json",
+            data: JSON.stringify(markId),
+            success: function (data, status) {
+                init();
+            },
+            error: function (status) {
+                alert(status);
+            }
+        });
+    }
+
+}
+
+
+
+
+
+
 /**
  * map 클릭시 팝업창 생성
  * map 클릭시 생성되는 팝업창 속성설정

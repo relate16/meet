@@ -1,9 +1,10 @@
 
 /*
+    해당 시간이 만료되거나
     1시간마다 24시간된 마커 삭제 -
     regist-mark.html의 <input type="text" id="startTime" name="startTime" placeholder="도착 시간"/> 이용
 
-    참석 누르면 올 수도 있는 사람 명수 추가하게 하기
+    참석 누르면 올 수도 있는 사람 명수 추가하게 하기 완료.
 
     MapPopUpController 에서 쓰인 메서드 MarkService에 정리 필요
 */

@@ -2,18 +2,28 @@ package com.example.meet.service;
 
 import com.example.meet.dto.MarkDto;
 import com.example.meet.entity.Mark;
+import com.example.meet.repository.MarkRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class MarkServiceImpl implements MarkService {
+
+    private final MarkRepository markRepository;
 
     @Override
     public MarkDto getMarkDto(Mark mark) {
@@ -54,6 +64,26 @@ public class MarkServiceImpl implements MarkService {
             markDtos.add(markDto);
         }
         return markDtos;
+    }
+
+    @Override
+    @Transactional
+    public Mark addParticipant(Long markId, HttpServletResponse response) throws IOException {
+        Optional<Mark> markOpt = markRepository.findById(markId);
+        String message = "해당 팝업창이 존재하지 않습니다.(id 미존재)";
+        Mark mark = null;
+        try {
+            mark = markOpt.orElseThrow(() -> new RuntimeException(message));
+            mark.addParticipant();
+        } catch (RuntimeException e) {
+            // 해당 id가 없으면 알림창 및 이전 페이지로 이동
+            response.setContentType("text/html; charset=utf-8");
+            PrintWriter w = response.getWriter();
+            w.write("<script>alert('" + message + "');history.go(-1);</script>");
+            w.flush();
+            w.close();
+        }
+        return mark;
     }
 
     /**

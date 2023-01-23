@@ -56,4 +56,13 @@ public class Mark {
         this.contents = contents;
         this.participant = participant;
     }
+
+    //비지니스로직
+    public void addParticipant() {
+        if (participant == null) {
+            participant = 1;
+        } else {
+            participant += 1;
+        }
+    }
 }
