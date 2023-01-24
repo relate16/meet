@@ -4,7 +4,7 @@
  * map 기능 설정
  */
 function init(){
-    // Controller에서 MarkDto 객체 insert
+    // Controller에서 MarkDto 객체 가져와 map에 marker 삽입
     $.ajax({
         type : "post",
         url: "/get-marks",
@@ -85,10 +85,6 @@ function participate(markId) {
     }
 
 }
-
-
-
-
 
 
 /**

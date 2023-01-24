@@ -25,6 +25,72 @@ public class MarkServiceImpl implements MarkService {
 
     private final MarkRepository markRepository;
 
+
+    /**
+     * 유효기간 지난 Mark 전부 삭제
+     * 즉, 현재시간보다 endtime이 적은 mark 전부 삭제
+     */
+    @Override
+    @Transactional
+    public void deleteMarksAfterNow() {
+        List<Mark> marksByEndTimeBefore = markRepository.findMarksByEndTimeBefore(LocalDateTime.now());
+        for (Mark mark : marksByEndTimeBefore) {
+            markRepository.delete(mark);
+        }
+    }
+
+    /**
+     * maker content창 참석 클릭시
+     * 올 수도 있는 사람 명 수 추가
+     */
+    @Override
+    @Transactional
+    public Mark addParticipant(Long markId, HttpServletResponse response) throws IOException {
+        Optional<Mark> markOpt = markRepository.findById(markId);
+        String message = "해당 팝업창이 존재하지 않습니다.(id 미존재)";
+        Mark mark = null;
+        try {
+            mark = markOpt.orElseThrow(() -> new RuntimeException(message));
+            mark.addParticipant();
+        } catch (RuntimeException e) {
+            // 해당 id가 없으면 알림창 및 이전 페이지로 이동
+            response.setContentType("text/html; charset=utf-8");
+            PrintWriter w = response.getWriter();
+            w.write("<script>alert('" + message + "');history.go(-1);</script>");
+            w.flush();
+            w.close();
+        }
+        return mark;
+    }
+
+
+    /**
+     * mark.endTime에 endTime 값을 넣기 전에
+     * endTime이 startTime보다 작을 경우 날짜 하루 더하는 메서드.
+     *
+     * 예를 들어
+     * 고객이 2023년 01월 18일에 mdTimePicker 를 입력할 때,
+     * startTime이 11:00 am 이고 endTime이 10:00 am 일 경우
+     * markEndTime을 다음날인 2023년 01월 19일 10:00am 으로 설정하게함으로써
+     * markStartTime, 2023년 01월 18일 11:00 am
+     * marEndTime, 2023년 01월 19일 10:00 am이 되게 함.
+     * @return Mark.endTime
+     */
+    @Override
+    public LocalDateTime checkEndTime(LocalDateTime markStartTime, LocalDateTime markEndTime) {
+        if (markEndTime.isBefore(markStartTime)) {
+            markEndTime = markEndTime.plusDays(1);
+        }
+        return markEndTime;
+    }
+
+
+
+    //MarkDto 관련
+
+    /**
+     * Mark mark -> MarkDto markDto
+     */
     @Override
     public MarkDto getMarkDto(Mark mark) {
         String startTime = convertMarkDtoTime(mark.getStartTime());
@@ -66,25 +132,57 @@ public class MarkServiceImpl implements MarkService {
         return markDtos;
     }
 
+    /**
+     * 설정한 시간(startTime or endTime)이 다음날일 경우 날짜 하루 더하는 메서드.
+     *
+     * 파라미터를 startTime을 넣을 때로 예를 들면
+     * 현재 시간이 2023년 01월 18일 11:00 am인데
+     * 고객이 startTime을 10:00 am 정한 경우,
+     * 2023년 01월 19일 10:00 am 처럼 변환
+     * @param markDtoTime = MarkDto.startTime or MarkDto.endTime
+     * @variable markTime = Mark.startTime or Mark.endTime
+     */
     @Override
-    @Transactional
-    public Mark addParticipant(Long markId, HttpServletResponse response) throws IOException {
-        Optional<Mark> markOpt = markRepository.findById(markId);
-        String message = "해당 팝업창이 존재하지 않습니다.(id 미존재)";
-        Mark mark = null;
-        try {
-            mark = markOpt.orElseThrow(() -> new RuntimeException(message));
-            mark.addParticipant();
-        } catch (RuntimeException e) {
-            // 해당 id가 없으면 알림창 및 이전 페이지로 이동
-            response.setContentType("text/html; charset=utf-8");
-            PrintWriter w = response.getWriter();
-            w.write("<script>alert('" + message + "');history.go(-1);</script>");
-            w.flush();
-            w.close();
+    public LocalDateTime checkDay(String markDtoTime) {
+        LocalDateTime markTime;
+        Integer hour;
+        Integer minute;
+        String regex = " ";
+        String[] split = markDtoTime.split(regex);
+        // split = ["2:00", "AM"]
+
+        String time = split[0];
+        String amPm = split[1];
+        String[] splitTime = time.split(":");
+        //splitTime = ["2", "00"]
+
+        //시간을 0~12 AM or PM에서 00~24로 바꿔주는 로직
+        if (split[1].equals("PM") && !splitTime[0].equals("12")) {
+            // pm이면 12시간을 더함. 단, 12:00 pm일 경우 12시간 더하지 않음. 더하면 24:00이 됨
+            hour = Integer.valueOf(splitTime[0]) + 12;
+            minute = Integer.valueOf(splitTime[1]);
+        } else if (split[1].equals("AM") && splitTime[0].equals("12")) {
+            // 12:00 am일 경우 시간을 00시로 변경. 변경 안하면 12:00이 됨
+            hour = Integer.valueOf(splitTime[0]) - 12;
+            minute = Integer.valueOf(splitTime[1]);
+        } else {
+            // 나머지, 즉 am이면 시간, 분 그대로 씀.
+            hour = Integer.valueOf(splitTime[0]) ;
+            minute = Integer.valueOf(splitTime[1]);
         }
-        return mark;
+
+        // 설정한 머무는 시간이 다음날일 경우 날짜 하루 더하는 설정
+        if ((hour - LocalDateTime.now().getHour()) * 60 + (minute - LocalDateTime.now().getMinute()) < 0) {
+            markTime = LocalDateTime.now().plusDays(1).withHour(hour).withMinute(minute);
+        } else {
+            markTime = LocalDateTime.now().withHour(hour).withMinute(minute);
+        }
+        return markTime;
     }
+
+
+
+    //private 메서드
 
     /**
      * mark.startTime 2023-01-21 00:00:01.702103 -> 2022년 01월 21일 으로 변환

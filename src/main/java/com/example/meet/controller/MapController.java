@@ -14,11 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,6 +33,7 @@ public class MapController {
     @ResponseBody
     @PostMapping("/get-marks")
     public List<MarkDto> getMarks() {
+        markService.deleteMarksAfterNow();
         List<Mark> marks = markRepository.findAll();
         List<MarkDto> markDtos = markService.getMarkDtos(marks);
         return markDtos;

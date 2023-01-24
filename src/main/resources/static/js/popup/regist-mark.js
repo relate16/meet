@@ -1,19 +1,12 @@
 
 /*
-    해당 시간이 만료되거나
-    1시간마다 24시간된 마커 삭제 -
-    regist-mark.html의 <input type="text" id="startTime" name="startTime" placeholder="도착 시간"/> 이용
-
-    참석 누르면 올 수도 있는 사람 명수 추가하게 하기 완료.
-
-    MapPopUpController 에서 쓰인 메서드 MarkService에 정리 필요
+    일정 : test 코드 짜기.
 */
 
 
 function windowClose() {
     window.close();
 }
-
 
 /**
  * 입력 부분 유효성 검사
@@ -43,12 +36,14 @@ function validate() {
         return false;
     }
 
-    // 글자수 검사
+    // 값 유효성 검사
     if ($('#contents').val().length >= 200) {
         alert("하고 싶은 말은 200자 이내로 써주세요.");
         return false;
+    } else if ($('#startTime').val() == $('#endTime').val()) {
+        alert("도착 시간과 떠날 시간이 같으면 안됩니다.")
+        return false;
     }
-
 }
 
 /**
