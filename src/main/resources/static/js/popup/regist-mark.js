@@ -1,6 +1,7 @@
 
 /*
     일정 : test 코드 짜기.
+    test 코드 작성 후 bindingResult 사용해보기
 */
 
 
