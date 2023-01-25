@@ -5,7 +5,7 @@
   <title>Meet 등록</title>
   <!--    js 라이브러리의 css    -->
   <link th:href="|#{registMarkCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" rel="stylesheet" type="text/css">
-<!--  <link href="css/lib/md-time-picker.css" rel="stylesheet">-->
+  <!--  <link href="css/lib/md-time-picker.css" rel="stylesheet">-->
   <link th:href="|#{mdTimePickerCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" rel="stylesheet">
 
   <!--    js 라이브러리    -->
@@ -35,7 +35,7 @@
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   <label><input type="radio" value="male" name="gender">남</label>
   <label><input type="radio" value="female" name="gender">여</label>
-  <label><input type="radio" value="etc" name="gender">기타</label><br><br>
+  <label><input type="radio" value="etc" name="gender">비공개</label><br><br>
 
   <label>나이대 :&nbsp</label>
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -50,7 +50,7 @@
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   <label><input type="radio" value="50~54" name="age">만 50~54세</label>
-  <label><input type="radio" value="55~59" name="age">만 55~60세</label><br><br>
+  <label><input type="radio" value="55~59" name="age">만 55~59세</label><br><br>
 
   <label for="character">성격 :&nbsp</label>
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

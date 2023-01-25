@@ -24,7 +24,7 @@ public class Mark {
     private String username;
 
     private String gender;
-    private String age;
+    private String age; //18~24, 25~29, 30~34, 35~39, 40~44, 45~49, 50~54, 55~59
     private String character;
 
     private String place;
