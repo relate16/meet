@@ -79,8 +79,9 @@ public class MarkServiceImplTest {
                 "testDay", null);
         Mark savedMark = markRepository.save(mark);
 
-        /*    when    */
         MockHttpServletResponse mockHttpServletResponse = new MockHttpServletResponse();
+
+        /*    when    */
         Mark addMark = markService.addParticipant(savedMark.getId(), mockHttpServletResponse);
 
         // 1차 캐시에 savedMark 가 저장되어 있으므로 DB에서 찾아오기 전에 flush 후 영속성 컨텍스트 초기화.
@@ -123,9 +124,9 @@ public class MarkServiceImplTest {
     @Test
     void getMarkDto() {
         /*    given    */
-        Mark mark = new Mark("userDay", "male", "18~24", "조용함", "xx빌딩 2층 별다방",
+        Mark mark = new Mark("userMarkDto", "male", "18~24", "조용함", "xx빌딩 2층 별다방",
                 "37.566535", "126.977969", LocalDateTime.now(), LocalDateTime.now().plusDays(1),
-                "testDay", null);
+                "testMarkDto", null);
 
         /*    when    */
         MarkDto markDto = markService.getMarkDto(mark);
@@ -140,7 +141,7 @@ public class MarkServiceImplTest {
         Assertions.assertThat(markDto.getLng()).isEqualTo(mark.getLng());
 
         // DateTimeFormatter.ofPattern("yyyy년 MM월 dd일") :
-        //  mark.startTime 2023-01-21 00:00:01.702103 -> 2022년 01월 21일 으로 변환
+        //      2023-01-21 00:00:01.702103 -> 2022년 01월 21일 으로 변환
         Assertions.assertThat(markDto.getStartYMD())
                 .isEqualTo(mark.getStartTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
         Assertions.assertThat(markDto.getEndYMD())
@@ -154,15 +155,51 @@ public class MarkServiceImplTest {
     }
     @Test
     void getMarkDtos() {
+        /*    given    */
+        List<Mark> marks = new ArrayList<>();
+        Mark mark = new Mark("userMark", "male", "18~24", "조용함", "xx빌딩 2층 별다방",
+                "37.566535", "126.977969", LocalDateTime.now(), LocalDateTime.now().plusDays(1),
+                "testMark", null);
+        Mark mark2 = new Mark("userMark2", "male", "25~29", "조용함", "xx빌딩 2층 별다방",
+                "37.566535", "126.977969", LocalDateTime.now(), LocalDateTime.now().plusDays(1),
+                "testMark2", null);
+        Mark mark3 = new Mark("userMark3", "male", "30~34", "조용함", "xx빌딩 2층 별다방",
+                "37.566535", "126.977969", LocalDateTime.now(), LocalDateTime.now().plusDays(1),
+                "testMark3", null);
+        marks.add(mark);
+        marks.add(mark2);
+        marks.add(mark3);
 
+        /*    when    */
+        List<MarkDto> markDtos = markService.getMarkDtos(marks);
+
+        /*    then    */
+        for (int i = 0; i < markDtos.size(); i++) {
+            Assertions.assertThat(markDtos.get(i)).isEqualTo(markService.getMarkDto(marks.get(i)));
+        }
     }
 
     @Test
     void checkDay() {
+        /*    given    */
+        LocalDateTime localDTNow = LocalDateTime.now();
 
+        // startTime 형식 예 : 10:58 AM
+        String startTimeH = convertMarkDtoTime(localDTNow.plusHours(-1));
+        String startTimeM = convertMarkDtoTime(localDTNow.plusMinutes(-1));
+
+        /*    when    */
+        LocalDateTime checkedStartTimeH = markService.checkDay(startTimeH);
+        LocalDateTime checkedStartTimeM = markService.checkDay(startTimeM);
+
+        /*    then    */
+        Assertions.assertThat(checkedStartTimeH.getDayOfMonth()).isEqualTo(localDTNow.plusDays(1).getDayOfMonth());
+        Assertions.assertThat(checkedStartTimeM.getDayOfMonth()).isEqualTo(localDTNow.plusDays(1).getDayOfMonth());
     }
 
 
+
+    // private 메서드
     /**
      * LocalDateTime 형식인
      * Mark.startTime 이나 Mark.endTime 을
