@@ -65,7 +65,8 @@ public class MarkServiceImpl implements MarkService {
 
 
     /**
-     * mark.endTime에 endTime 값을 넣기 전에
+     * markService.checkDay(endTime)메서드 반환 값을
+     * mark.endTime에 넣기 전에
      * endTime이 startTime보다 작을 경우 날짜 하루 더하는 메서드.
      *
      * 예를 들어
