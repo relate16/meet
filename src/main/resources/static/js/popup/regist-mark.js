@@ -2,6 +2,9 @@
 /*
     일정 : test 코드 짜기.
     test 코드 작성 후 bindingResult 사용해보기
+
+    수정 목록 :
+        top 템플릿 조각 추가 및 적용.
 */
 
 

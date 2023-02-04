@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>Meet</title>
     <!--    css    -->
-    <link rel="stylesheet" th:href="#{meetMapCss}">
+    <link rel="stylesheet" th:href="|#{meetMapCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|">
+    <link rel="stylesheet" th:href="|#{topCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|">
+
     <!--    js 라이브러리의 css    -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
           integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
           crossorigin=""/>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-
     <!--    js 라이브러리    -->
     <script
             src="https://code.jquery.com/jquery-3.6.3.min.js"
@@ -22,10 +23,13 @@
 
 </head>
 <body>
+<!--<top th:replace="~{layout/top :: top}"></top>-->
+<top th:replace="~{#{topHtml} :: top}"></top>
 <div class="title"><h1>혹시 올 사람?</h1></div>
 <div id="mapid"></div>
 <input type="hidden" id="markLocationLat" name="markLocationLat" value="">
 <input type="hidden" id="markLocationLng" name="markLocationLng" value="">
 <script th:src="|#{meetMapJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>
+<script th:src="|#{topJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>
 </body>
 </html>

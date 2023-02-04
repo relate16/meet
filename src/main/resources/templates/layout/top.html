@@ -1,0 +1,83 @@
+<!--top.html 의 템플릿 조각 적용시 해당 html 에 필수 추가 코드 :
+  1. jquery 적용 :
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous"></script>
+  2. css 적용 :
+  <link rel="stylesheet" th:href="#{topCss}">
+  3. js 적용 :
+  <script th:src="|#{topJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="#{topCss}">
+    <!--    js 라이브러리    -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+  <section class="navigation" th:fragment="top">
+  <div class="nav-container">
+    <div class="brand">
+      <a href="/">혹시 올 사람?</a>
+    </div>
+    <nav>
+      <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+      <ul class="nav-list">
+        <li>
+          <a href="/">홈</a>
+        </li>
+        <li>
+          <a href="#!">가격 정보</a>
+          <ul class="nav-dropdown">
+            <li>
+              <a href="#!">Web Design</a>
+            </li>
+            <li>
+              <a href="#!">Web Development</a>
+            </li>
+            <li>
+              <a href="#!">Graphic Design</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#!">충전</a>
+        </li>
+        <li>
+          <a href="#!">내정보</a>
+          <ul class="nav-dropdown">
+            <li>
+              <a href="#!">Web Design</a>
+            </li>
+            <li>
+              <a href="#!">Web Development</a>
+            </li>
+            <li>
+              <a href="#!">Graphic Design</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/log-in">로그인</a>
+        </li>
+        <li>
+          <a href="#!">회원가입</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<script th:src="|#{topJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>
+</body>
+</html>
+
+<!--Copyright (c) 2023 by Tania Rascia (https://codepen.io/taniarascia/pen/dYvvYv)-->
