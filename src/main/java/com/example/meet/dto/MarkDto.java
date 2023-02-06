@@ -21,7 +21,7 @@ public class MarkDto {
     private String gender;
 
     @NotNull
-    private String age;
+    private String ageRange;
 
     @NotNull
     @Column(length = 20)

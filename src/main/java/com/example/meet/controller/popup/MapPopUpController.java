@@ -36,7 +36,7 @@ public class MapPopUpController {
         LocalDateTime markEndTime = markService.checkDay(endTime);
         markEndTime = markService.checkEndTime(markStartTime, markEndTime);
 
-        Mark mark = new Mark(markDto.getUsername(), markDto.getGender(), markDto.getAge(),
+        Mark mark = new Mark(markDto.getUsername(), markDto.getGender(), markDto.getAgeRange(),
                 markDto.getCharacter(), markDto.getPlace(), markDto.getLat(), markDto.getLng(),
                 markStartTime, markEndTime, markDto.getContents(), markDto.getParticipant());
         markRepository.save(mark);

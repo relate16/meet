@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @SpringBootTest
@@ -134,7 +133,7 @@ public class MarkServiceImplTest {
         /*    then    */
         Assertions.assertThat(markDto.getUsername()).isEqualTo(mark.getUsername());
         Assertions.assertThat(markDto.getGender()).isEqualTo(mark.getGender());
-        Assertions.assertThat(markDto.getAge()).isEqualTo(mark.getAge());
+        Assertions.assertThat(markDto.getAgeRange()).isEqualTo(mark.getAgeRange());
         Assertions.assertThat(markDto.getCharacter()).isEqualTo(mark.getCharacter());
         Assertions.assertThat(markDto.getPlace()).isEqualTo(mark.getPlace());
         Assertions.assertThat(markDto.getLat()).isEqualTo(mark.getLat());

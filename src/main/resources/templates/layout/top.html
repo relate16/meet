@@ -23,7 +23,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-  <section class="navigation" th:fragment="top">
+  <section class="navigation" th:fragment="top(username, cash, logInOut, signInOut)">
   <div class="nav-container">
     <div class="brand">
       <a href="/">혹시 올 사람?</a>
@@ -35,16 +35,16 @@
           <a href="/">홈</a>
         </li>
         <li>
-          <a href="#!">가격 정보</a>
+          <a href="#!">조건 검색</a>
           <ul class="nav-dropdown">
             <li>
-              <a href="#!">Web Design</a>
+              <a href="#!">현재 + 0~2시간</a>
             </li>
             <li>
-              <a href="#!">Web Development</a>
+              <a href="#!">현재 + 0~24시간</a>
             </li>
             <li>
-              <a href="#!">Graphic Design</a>
+              <a href="#!">모든 약속</a>
             </li>
           </ul>
         </li>
@@ -55,21 +55,22 @@
           <a href="#!">내정보</a>
           <ul class="nav-dropdown">
             <li>
-              <a href="#!">Web Design</a>
+              <a href="#!" th:text="${username}">Web Design</a>
             </li>
             <li>
-              <a href="#!">Web Development</a>
-            </li>
-            <li>
-              <a href="#!">Graphic Design</a>
+              <a href="#!" th:text="${cash}">Web Development</a>
             </li>
           </ul>
         </li>
         <li>
-          <a href="/log-in">로그인</a>
+          <a href="/log-in" th:text="${logInOut}">로그인</a>
         </li>
         <li>
-          <a href="#!">회원가입</a>
+          <a href="#!" th:text="${signInOut}">회원가입</a>
+        </li>
+
+        <li>
+          <a href="#!" th:text="|현재 보유 : ${cash}원|">회원가입</a>
         </li>
       </ul>
     </nav>
