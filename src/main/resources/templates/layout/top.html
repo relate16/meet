@@ -23,7 +23,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-  <section class="navigation" th:fragment="top(username, cash, logInOut, signInOut)">
+  <section class="navigation" th:fragment="top(username, cash, login, signup)">
   <div class="nav-container">
     <div class="brand">
       <a href="/">혹시 올 사람?</a>
@@ -63,10 +63,10 @@
           </ul>
         </li>
         <li>
-          <a href="/log-in" th:text="${logInOut}">로그인</a>
+          <a href="/login" th:text="${login}">로그인</a>
         </li>
         <li>
-          <a href="#!" th:text="${signInOut}">회원가입</a>
+          <a href="/signup" th:text="${signup}">회원가입</a>
         </li>
 
         <li>

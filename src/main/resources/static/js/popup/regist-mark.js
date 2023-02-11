@@ -1,12 +1,8 @@
 
 /*
     일정 :
-    Member.class의
-    String gender; // enum으로 만들기
-    다대일 Mark-Member 관계 설정하기
-    설정 후, meet-map.html의
-    <top th:replace="~{#{topHtml} :: top('test','1000','로그인','회원가입')}"></top>
-    파라미터로 넣기.
+    MapController.java public String showMap(Model model) 재정비하기.
+    회원가입 valid js에서 한 번 일단 체크 하기
     test 코드 작성 후 bindingResult 사용해보기
 
     수정 목록 :

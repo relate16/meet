@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -40,6 +38,11 @@ public class Mark {
 
     private Integer participant;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
+
+
+    // 생성자
     public Mark(String username, String gender, String ageRange, String character, String place, String lat, String lng,
                 LocalDateTime startTime, LocalDateTime endTime, String contents, Integer participant) {
         this.username = username;
@@ -54,6 +57,23 @@ public class Mark {
         this.contents = contents;
         this.participant = participant;
     }
+
+    public Mark(String username, String gender, String ageRange, String character, String place, String lat, String lng,
+                LocalDateTime startTime, LocalDateTime endTime, String contents, Integer participant, Member member) {
+        this.username = username;
+        this.gender = gender;
+        this.ageRange = ageRange;
+        this.character = character;
+        this.place = place;
+        this.lat = lat;
+        this.lng = lng;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.contents = contents;
+        this.participant = participant;
+        this.member = member;
+    }
+
 
     //비지니스로직
     public void addParticipant() {

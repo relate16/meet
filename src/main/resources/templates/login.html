@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="|#{loginCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|">
+    <!--  js 라이브러리-->
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="login-box">
+  <h2>Login</h2>
+  <form id="loginForm" method="post" th:action>
+    <div class="user-box">
+      <input type="text" name="" required="">
+      <label>Username</label>
+    </div>
+    <div class="user-box">
+      <input type="password" name="" required="">
+      <label>Password</label>
+    </div>
+    <a href="#" onclick="submit()">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      로그인
+    </a>
+    <a href="/">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      취소
+    </a>
+  </form>
+</div>
+<script th:src="|#{loginJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>
+</body>
+</html>
+
+<!--Copyright (c) 2023 by Soufiane Khalfaoui HaSsani (https://codepen.io/soufiane-khalfaoui-hassani/pen/LYpPWda)-->

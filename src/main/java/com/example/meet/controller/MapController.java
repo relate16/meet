@@ -26,6 +26,17 @@ public class MapController {
 
     @GetMapping("/")
     public String showMap(Model model) {
+        String username = "testName";
+        Integer cash = 1000;
+        String login = "로그인";
+        String signup = "회원가입";
+
+//                'testName','1000','로그인','회원가입'
+        model.addAttribute("username", username);
+        model.addAttribute("cash", cash);
+        model.addAttribute("login", login);
+        model.addAttribute("signup", signup);
+
         model.addAttribute("localDateTime", LocalDateTime.now());
         return "meet-map";
     }

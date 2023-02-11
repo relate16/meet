@@ -23,8 +23,8 @@
 
 </head>
 <body>
-<!--<top th:replace="~{layout/top :: top}"></top>-->
-<top th:replace="~{#{topHtml} :: top('test','1000','로그인','회원가입')}"></top>
+<!--<top th:replace="~{#{topHtml} :: top('test','1000','로그인','회원가입')}"></top>-->
+<top th:replace="~{#{topHtml} :: top(${username},${cash},${login},${signup})}"></top>
 <div class="title"><h1>혹시 올 사람?</h1></div>
 <div id="mapid"></div>
 <input type="hidden" id="markLocationLat" name="markLocationLat" value="">
