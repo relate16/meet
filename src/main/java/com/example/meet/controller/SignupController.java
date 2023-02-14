@@ -6,6 +6,8 @@ import com.example.meet.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +24,22 @@ public class SignupController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/signup")
-    public String getSignup(Model model) {
+    public String getSignup(@ModelAttribute MemberDto memberDto, Model model) {
         model.addAttribute("localDateTime", LocalDateTime.now());
         return "signup";
     }
     @PostMapping("/signup")
-    public void postSignup(@ModelAttribute MemberDto memberDto, HttpServletResponse response , Model model) {
+    public String postSignup(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult, HttpServletResponse response , Model model) {
+
+        if (!memberDto.getGender().equals("남") && !memberDto.getGender().equals("여")
+                && !memberDto.getGender().equals("비공개")) {
+            bindingResult.reject("validatedGender");
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "signup";
+        }
+
         memberDto.setCash(0);
         Member member = new Member(memberDto.getUsername(), memberDto.getPassword(),
                 memberDto.getAge(), memberDto.getGender(), memberDto.getCash());
@@ -41,5 +53,6 @@ public class SignupController {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        return "redirect:/";
     }
 }

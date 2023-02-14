@@ -10,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -37,15 +39,14 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String postLogin(@ModelAttribute MemberDto memberDto, BindingResult bindingResult, HttpServletRequest request, Model model) {
-        // 입력 validation
-        if (!StringUtils.hasText(memberDto.getUsername())) {
-            bindingResult.addError(
-                    new FieldError("member", "username", "username은 필수입니다."));
-        }
-        if (!StringUtils.hasText(memberDto.getPassword())) {
-            bindingResult.addError(
-                    new FieldError("member", "username", "password는 필수입니다."));
+    @Transactional
+    public String postLogin(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult, HttpServletRequest request, Model model) {
+        // 로그인 확인용 회원 가입 코드
+        Member memberTest = new Member("test", "test", 10, "남", 0);
+        memberRepository.save(memberTest);
+
+        if (bindingResult.hasErrors()) {
+            return "login";
         }
 
         Optional<Member> memberOpt = memberRepository.findByUsername(memberDto.getUsername());
