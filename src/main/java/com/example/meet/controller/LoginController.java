@@ -1,23 +1,23 @@
 package com.example.meet.controller;
 
-import com.example.meet.dto.MemberDto;
+import com.example.meet.dto.MemberLoginDto;
+import com.example.meet.dto.MemberSingupDto;
 import com.example.meet.entity.Member;
 import com.example.meet.repository.MemberRepository;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.example.meet.service.AlertService;
+import com.example.meet.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -29,27 +29,29 @@ import static com.example.meet.constants.SessionConst.LOGIN_MEMBER;
 public class LoginController {
 
     private final MemberRepository memberRepository;
+    private final MemberService memberService;
+    private final AlertService alertService;
 
-    // 세션 전에 로그인 기능 구현부터 하기
     @GetMapping("/login")
-
-    public String getLogin(@ModelAttribute MemberDto memberDto, Model model) {
+    public String getLogin(@ModelAttribute MemberLoginDto memberLoginDto, Model model) {
         model.addAttribute("localDateTime", LocalDateTime.now());
         return "login";
     }
 
     @PostMapping("/login")
-    @Transactional
-    public String postLogin(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult, HttpServletRequest request, Model model) {
-        // 로그인 확인용 회원 가입 코드
-        Member memberTest = new Member("test", "test", 10, "남", 0);
-        memberRepository.save(memberTest);
+    public String postLogin(@Validated @ModelAttribute MemberLoginDto memberLoginDto, BindingResult bindingResult,
+                            HttpServletRequest request, HttpServletResponse response, Model model) {
+        // 로그인 확인용 회원 가입 코드. (임시)
+        MemberSingupDto memberDtoTest = new MemberSingupDto("test", "test", "test", 10, "남", null);
+        memberService.saveMember(memberDtoTest);
 
         if (bindingResult.hasErrors()) {
+            String message = "시스템 오류로 로그인에 실패했습니다. 관리자에게 문의해주세요.";
+            alertService.notificationWindow(message, response);
             return "login";
         }
 
-        Optional<Member> memberOpt = memberRepository.findByUsername(memberDto.getUsername());
+        Optional<Member> memberOpt = memberRepository.findByUsername(memberLoginDto.getUsername());
 
         Member member = null;
         try {
@@ -58,7 +60,7 @@ public class LoginController {
             throw new RuntimeException(e);
         }
 
-        if (!memberDto.getPassword().equals(member.getPassword())) {
+        if (!memberLoginDto.getPassword().equals(member.getPassword())) {
             // 패스워드 불일치
         }
 
