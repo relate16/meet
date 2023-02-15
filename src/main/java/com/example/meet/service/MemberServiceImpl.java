@@ -1,6 +1,6 @@
 package com.example.meet.service;
 
-import com.example.meet.dto.MemberSingupDto;
+import com.example.meet.dto.MemberSignupDto;
 import com.example.meet.entity.Member;
 import com.example.meet.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +16,10 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     @Transactional
-    public Long saveMember(MemberSingupDto memberSingupDto) {
-        memberSingupDto.setCash(0);
-        Member member = new Member(memberSingupDto.getUsername(), memberSingupDto.getPassword(),
-                memberSingupDto.getAge(), memberSingupDto.getGender(), memberSingupDto.getCash());
+    public Long saveMember(MemberSignupDto memberSignupDto) {
+        memberSignupDto.setCash(0);
+        Member member = new Member(memberSignupDto.getUsername(), memberSignupDto.getPassword(),
+                memberSignupDto.getAge(), memberSignupDto.getGender(), memberSignupDto.getCash());
         Member savedMember = memberRepository.save(member);
         return savedMember.getId();
     }

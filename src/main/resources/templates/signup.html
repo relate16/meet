@@ -14,7 +14,7 @@
 <body>
 <div class="login-box">
   <h2>Signup</h2>
-  <form id="signupForm" action="/signup" method="post" th:object="${memberSingupDto}">
+  <form id="signupForm" action="/signup" method="post" th:object="${memberSignupDto}">
     <div class="user-box">
       <input type="text" id="username" name="username" th:field="*{username}" required="">
       <div th:errors="*{username}" style="color: #ff3399;"></div>

@@ -13,7 +13,7 @@
 <body>
 <div class="login-box">
   <h2>Login</h2>
-  <form id="loginForm" method="post" th:action th:object="${memberLoginDto}">
+  <form id="loginForm" method="post" th:action th:object="${memberDto}">
     <div class="user-box">
       <input type="text" th:field="*{username}" required="">
       <div th:errors="*{username}" style="color: #ff3399;"></div>
@@ -24,6 +24,7 @@
       <div th:errors="*{password}" style="color: #ff3399;"></div>
       <label>비밀번호</label>
     </div>
+    <div th:if="${#fields.hasGlobalErrors()}"><p th:each="error : ${#fields.globalErrors()}" th:text="${error}" style="color: #ff3399;"></p></div>
     <a href="#" onclick="submit()">
       <span></span>
       <span></span>
