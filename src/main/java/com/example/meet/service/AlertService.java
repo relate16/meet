@@ -10,5 +10,5 @@ public interface AlertService {
     /**
      * 알림창
      */
-    void notificationWindow(String message, HttpServletResponse response);
+    void notificationWindow(String message, String href, HttpServletResponse response);
 }

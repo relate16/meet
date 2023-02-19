@@ -23,7 +23,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-  <section class="navigation" th:fragment="top(main1, main2, main3)">
+  <section class="navigation" th:fragment="top(href1, href2, menu1, menu2, menu3)">
   <div class="nav-container">
     <div class="brand">
       <a href="/">혹시 올 사람?</a>
@@ -49,20 +49,20 @@
           </ul>
         </li>
         <li>
-          <a href="#!">충전</a>
+          <a href="/charge">충전</a>
         </li>
         <li>
-          <a href="#!">내정보</a>
+          <a href="/my-info">내정보</a>
         </li>
         <li>
-          <a href="/login" th:text="${main1}">main1</a>
+          <a th:href="@{${href1}}" th:text="${menu1}">main1</a>
         </li>
         <li>
-          <a href="/signup" th:text="${main2}">main2</a>
+          <a th:href="@{${href2}}" th:text="${menu2}">main2</a>
         </li>
 
         <li>
-          <a href="#!" th:text="|보유 금액 : ${main3}원|">main3</a>
+          <a href="#!" th:text="|보유 금액 : ${menu3}원|">main3</a>
         </li>
       </ul>
     </nav>

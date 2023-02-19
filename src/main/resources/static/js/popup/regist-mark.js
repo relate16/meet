@@ -25,7 +25,7 @@ function validate() {
     } else if (jQuery.isEmptyObject($("input[name=gender]:checked").val())) {
         alert("성별을 입력해주세요.");
         return false;
-    } else if (jQuery.isEmptyObject($("input[name=age]:checked").val())) {
+    } else if (jQuery.isEmptyObject($("input[name=ageRange]:checked").val())) {
         alert("나이대를 입력해주세요.");
         return false;
     } else if (jQuery.isEmptyObject($('#character').val())) {
@@ -67,7 +67,7 @@ function insertMark() {
     var params = {
         username: $("#username").val(),
         gender: $("input[name=gender]:checked").val(),
-        age: $("input[name=age]:checked").val(),
+        ageRange: $("input[name=ageRange]:checked").val(),
         character: $("#character").val(),
         place: $("#place").val(),
         lat: lat,

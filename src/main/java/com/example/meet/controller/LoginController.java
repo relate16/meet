@@ -10,9 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +44,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String postLogin(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult,
-                            HttpServletRequest request, Model model) {
+                            @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request, Model model) {
         // 유효성 검사
         Optional<Member> memberOpt = memberRepository.findByUsername(memberDto.getUsername());
         if (!memberOpt.isPresent()) {
@@ -68,6 +66,17 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.setAttribute(LOGIN_MEMBER, member);
         model.addAttribute("localDateTime", LocalDateTime.now());
+        return "redirect:" + redirectURL;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        if (session != null) {
+            session.invalidate();
+        }
+
         return "redirect:/";
     }
 }

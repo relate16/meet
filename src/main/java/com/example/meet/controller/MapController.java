@@ -1,7 +1,6 @@
 package com.example.meet.controller;
 
 import com.example.meet.dto.MarkDto;
-import com.example.meet.dto.MemberDto;
 import com.example.meet.entity.Mark;
 import com.example.meet.entity.Member;
 import com.example.meet.repository.MarkRepository;
@@ -16,6 +15,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.example.meet.constants.SessionConst.LOGIN_MEMBER;
+
 @Controller
 @RequiredArgsConstructor
 public class MapController {
@@ -24,28 +25,37 @@ public class MapController {
     private final MarkService markService;
 
     @GetMapping("/")
-    public String showMap(@SessionAttribute(name = "loginMember", required = false) Member loginMember, Model model) {
+    public String showMap(@SessionAttribute(name = LOGIN_MEMBER, required = false) Member loginMember, Model model) {
 
         if (loginMember == null) {
             Integer cash = 0;
+            String href1 = "/login";
+            String href2 = "/signup";
             String login = "로그인";
             String signup = "회원가입";
 
-            model.addAttribute("main1", login);
-            model.addAttribute("main2", signup);
-            model.addAttribute("main3", cash);
+            model.addAttribute("href1", href1); // top.html parameter
+            model.addAttribute("href2", href2); // top.html parameter
+            model.addAttribute("menu1", login); // top.html parameter
+            model.addAttribute("menu2", signup); // top.html parameter
+            model.addAttribute("menu3", cash); // top.html parameter
             model.addAttribute("localDateTime", LocalDateTime.now());
             return "meet-map";
         }
 
         Integer cash = loginMember.getCash();
+        String href1 = "/logout";
+        String href2 = "#!";
         String logout = "로그아웃";
-        String signout = "회원탈퇴";
-        model.addAttribute("main1", logout);
-        model.addAttribute("main2", signout);
-        model.addAttribute("main3", cash);
+        String username = loginMember.getUsername() + "님";
+
+        model.addAttribute("href1", href1); // top.html parameter
+        model.addAttribute("href2", href2); // top.html parameter
+        model.addAttribute("menu1", logout); // top.html parameter
+        model.addAttribute("menu2", username); // top.html parameter
+        model.addAttribute("menu3", cash); // top.html parameter
         model.addAttribute("localDateTime", LocalDateTime.now());
-        return "meet-map";
+        return "meet-map-login";
     }
 
     @ResponseBody

@@ -27,8 +27,9 @@ public class SignupController {
         model.addAttribute("localDateTime", LocalDateTime.now());
         return "signup";
     }
+
     @PostMapping("/signup")
-    public String postSignup(@Validated @ModelAttribute MemberSignupDto memberSignupDto, BindingResult bindingResult, HttpServletResponse response , Model model) {
+    public String postSignup(@Validated @ModelAttribute MemberSignupDto memberSignupDto, BindingResult bindingResult, Model model) {
 
         // 글로벌 error
         if (!memberSignupDto.getGender().equals("남") && !memberSignupDto.getGender().equals("여")
@@ -44,8 +45,19 @@ public class SignupController {
 
         // 회원가입
         memberService.saveMember(memberSignupDto);
-        String message = "회원가입이 완료되었습니다.";
-        alertService.notificationWindow(message, response);
-        return "redirect:/";
+
+        return "redirect:/signup/redirect";
     }
+
+    /**
+     * 알림창을 띄우기 위한 메서드
+     */
+    @GetMapping("/signup/redirect")
+    public void afterPostSignup(HttpServletResponse response, Model model) {
+        String message = "회원가입이 완료되었습니다.";
+        String href = "/login";
+        alertService.notificationWindow(message, href, response);
+    }
+
+
 }

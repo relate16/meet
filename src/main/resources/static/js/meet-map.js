@@ -46,7 +46,7 @@ function insertMark(markDto) {
     marker.bindPopup(
         `<b>이름 : ${markDto.username}</b><br>
         <b>성별 : ${markDto.gender}</b><br>
-        <b>나이 : ${markDto.age}</b><br>
+        <b>나이 : ${markDto.ageRange}</b><br>
         <b>성격 : ${markDto.character}</b><br>
         <b>장소 : ${markDto.place}</b><br>
         <b>머무는 시간 :</b><br>
@@ -57,6 +57,7 @@ function insertMark(markDto) {
         <b>내용 :</b><br>
         <div style="width: 220px; word-break: break-all; border: ridge;"><b>${markDto.contents}</b></div>
         <b>올 수도 있는 사람: ${markDto.participant} 명</b><br>
+        <input type="hidden" value="${markDto.id}"/>
         <input type='button' value='참석' onclick="participate(${markDto.id})"/>`).openPopup();
 
 }

@@ -12,11 +12,11 @@ public class AlertServiceImpl implements AlertService{
      * 알림창
      */
     @Override
-    public void notificationWindow(String message, HttpServletResponse response) {
+    public void notificationWindow(String message, String href, HttpServletResponse response) {
             try {
                 response.setContentType("text/html; charset=utf-8");
                 PrintWriter w = response.getWriter();
-                w.write("<script>alert('" + message + "');location.href='/';</script>");
+                w.write("<script>alert('" + message + "');location.href='" + href + "';</script>");
                 w.flush();
                 w.close();
             } catch(Exception e) {
