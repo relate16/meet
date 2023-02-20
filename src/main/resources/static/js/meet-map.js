@@ -11,14 +11,13 @@ function init(){
         async: false,
         contentType: 'application/json',
         dataType: "json",
-        // data: JSON.stringify(params),
+        // data: JSON.stringify(),
         success : function (data, status) {
+            console.log("data=" + data);
             for (const markDto of data) {
-                console.log("success markDto = " + JSON.stringify(markDto));
                 if (markDto.participant == null) {
                     markDto.participant = 0;
                 }
-                console.log("after if markDto = " + JSON.stringify(markDto));
                 insertMark(markDto);
             }
             // alert(status);
@@ -58,7 +57,34 @@ function insertMark(markDto) {
         <div style="width: 220px; word-break: break-all; border: ridge;"><b>${markDto.contents}</b></div>
         <b>올 수도 있는 사람: ${markDto.participant} 명</b><br>
         <input type="hidden" value="${markDto.id}"/>
-        <input type='button' value='참석' onclick="participate(${markDto.id})"/>`).openPopup();
+        <input type='button' value='참석' onclick="participate(${markDto.id})"/>
+        <input type='button' value='삭제' onclick="deleteMark(${markDto.id})"/>`).openPopup();
+
+}
+
+/**
+ * map에 mark 삭제
+ */
+function deleteMark(markId) {
+    const boolean = confirm("삭제하시겠습니까?");
+
+    if (boolean) {
+        $.ajax({
+            type: "post",
+            url: "/delete-mark",
+            async: false,
+            contentType: 'application/json',
+            dataType: "json",
+            data: JSON.stringify(markId),
+            success: function (data, status) {
+                location.href = "/";
+            },
+            error: function (status) {
+                alert("해당 마크를 삭제할 권한이 없습니다.");
+            }
+        });
+
+    }
 
 }
 

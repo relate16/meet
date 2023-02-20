@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class MarkDto {
 
     @NotNull
-    private Long id;
+    private Long id; // mark.getId() 와 동일
 
     @NotNull
     @Column(length = 8)

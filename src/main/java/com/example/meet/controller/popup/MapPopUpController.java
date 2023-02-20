@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static com.example.meet.constants.SessionConst.LOGIN_MEMBER;
 
@@ -50,5 +51,18 @@ public class MapPopUpController {
         MarkDto result = markService.getMarkDto(mark);
         return result;
     }
+
+    @PostMapping("/delete-mark")
+    @ResponseBody
+    public boolean deleteMark(@RequestBody Long markId, @SessionAttribute(name = LOGIN_MEMBER) Member loginMember) throws Exception {
+        Optional<Mark> markOpt = markRepository.findById(markId);
+        Mark mark = markOpt.orElseThrow(() -> new RuntimeException());
+        if (mark.getMember().getId() != loginMember.getId()) {
+            throw new Exception("해당 회원이 mark를 삭제할 권한이 없습니다.");
+        }
+        markRepository.delete(mark);
+        return true;
+    }
+
 
 }
