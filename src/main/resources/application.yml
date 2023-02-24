@@ -4,6 +4,8 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  messages:
+    basename: messages,errors
 
   jpa:
     hibernate:
@@ -18,3 +20,7 @@ logging:
   level:
     org.hibernate.sql: debug
 #    org.hibernate.type: trace
+server:
+  servlet:
+    session:
+      tracking-modes: cookie

@@ -2,6 +2,7 @@ package com.example.meet.controller.popup;
 
 import com.example.meet.dto.MarkDto;
 import com.example.meet.entity.Mark;
+import com.example.meet.entity.Member;
 import com.example.meet.repository.MarkRepository;
 import com.example.meet.service.MarkService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import static com.example.meet.constants.SessionConst.LOGIN_MEMBER;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,7 +30,7 @@ public class MapPopUpController {
 
     @PostMapping("/insert-mark")
     @ResponseBody
-    public MarkDto insertMark(@RequestBody MarkDto markDto) {
+    public MarkDto insertMark(@RequestBody MarkDto markDto, @SessionAttribute(name = LOGIN_MEMBER) Member loginMember) {
 
         String startTime = markDto.getStartTime();
         String endTime = markDto.getEndTime();
@@ -36,9 +40,9 @@ public class MapPopUpController {
         LocalDateTime markEndTime = markService.checkDay(endTime);
         markEndTime = markService.checkEndTime(markStartTime, markEndTime);
 
-        Mark mark = new Mark(markDto.getUsername(), markDto.getGender(), markDto.getAge(),
+        Mark mark = new Mark(markDto.getUsername(), markDto.getGender(), markDto.getAgeRange(),
                 markDto.getCharacter(), markDto.getPlace(), markDto.getLat(), markDto.getLng(),
-                markStartTime, markEndTime, markDto.getContents(), markDto.getParticipant());
+                markStartTime, markEndTime, markDto.getContents(), markDto.getParticipant(), loginMember);
         markRepository.save(mark);
 
         // ajax에서 markDto.startDay markDto.endDay를 계산해서 넘겨주지 않으므로

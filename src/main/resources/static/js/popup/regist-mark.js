@@ -1,7 +1,9 @@
 
 /*
-    일정 : test 코드 짜기.
-    test 코드 작성 후 bindingResult 사용해보기
+    일정 :
+    MapController.java public String showMap(Model model) 재정비하기.
+    Test 코드 다 수정하기.
+
 */
 
 
@@ -20,7 +22,7 @@ function validate() {
     } else if (jQuery.isEmptyObject($("input[name=gender]:checked").val())) {
         alert("성별을 입력해주세요.");
         return false;
-    } else if (jQuery.isEmptyObject($("input[name=age]:checked").val())) {
+    } else if (jQuery.isEmptyObject($("input[name=ageRange]:checked").val())) {
         alert("나이대를 입력해주세요.");
         return false;
     } else if (jQuery.isEmptyObject($('#character').val())) {
@@ -62,7 +64,7 @@ function insertMark() {
     var params = {
         username: $("#username").val(),
         gender: $("input[name=gender]:checked").val(),
-        age: $("input[name=age]:checked").val(),
+        ageRange: $("input[name=ageRange]:checked").val(),
         character: $("#character").val(),
         place: $("#place").val(),
         lat: lat,

@@ -13,6 +13,7 @@ body {
     height: 80%;
     margin: 50px;
     margin-top: 0px;
+    z-index: 1;
 }
 
 h1 {

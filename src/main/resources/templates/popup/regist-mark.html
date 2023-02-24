@@ -5,7 +5,6 @@
   <title>Meet 등록</title>
   <!--    js 라이브러리의 css    -->
   <link th:href="|#{registMarkCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" rel="stylesheet" type="text/css">
-  <!--  <link href="css/lib/md-time-picker.css" rel="stylesheet">-->
   <link th:href="|#{mdTimePickerCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" rel="stylesheet">
 
   <!--    js 라이브러리    -->
@@ -22,7 +21,6 @@
 <div class="header">
   <div><span th:text="|혹시 올 사람?|"></span></div><br>
   <div th:text="${#temporals.format(localDateTime,'yyyy-MM-dd')}">날짜</div>
-<!--  <div id ="currentTime" name="currentTime" th:text="${#temporals.format(localDateTime,'yyyy-MM-dd')}">날짜</div>-->
 </div>
 <br>
 <div class="login">
@@ -39,18 +37,18 @@
 
   <label>나이대 :&nbsp</label>
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  <label><input type="radio" value="18~24" name="age">만 18~24세</label>
-  <label><input type="radio" value="25~29" name="age">만 25~29세</label>
-  <label><input type="radio" value="30~34" name="age">만 30~34세</label>
+  <label><input type="radio" value="18~24" name="ageRange">만 18~24세</label>
+  <label><input type="radio" value="25~29" name="ageRange">만 25~29세</label>
+  <label><input type="radio" value="30~34" name="ageRange">만 30~34세</label>
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  <label><input type="radio" value="35~39" name="age">만 35~39세</label>
-  <label><input type="radio" value="40~44" name="age">만 40~44세</label>
-  <label><input type="radio" value="45~49" name="age">만 45~49세</label>
+  <label><input type="radio" value="35~39" name="ageRange">만 35~39세</label>
+  <label><input type="radio" value="40~44" name="ageRange">만 40~44세</label>
+  <label><input type="radio" value="45~49" name="ageRange">만 45~49세</label>
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  <label><input type="radio" value="50~54" name="age">만 50~54세</label>
-  <label><input type="radio" value="55~59" name="age">만 55~59세</label><br><br>
+  <label><input type="radio" value="50~54" name="ageRange">만 50~54세</label>
+  <label><input type="radio" value="55~59" name="ageRange">만 55~59세</label><br><br>
 
   <label for="character">성격 :&nbsp</label>
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

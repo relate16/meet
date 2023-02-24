@@ -1,0 +1,76 @@
+<!--top.html 의 템플릿 조각 적용시 해당 html 에 필수 추가 코드 :
+  1. jquery 적용 :
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous"></script>
+  2. css 적용 :
+  <link rel="stylesheet" th:href="#{topCss}">
+  3. js 적용 :
+  <script th:src="|#{topJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="#{topCss}">
+    <!--    js 라이브러리    -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+  <section class="navigation" th:fragment="top(href1, href2, menu1, menu2, menu3)">
+  <div class="nav-container">
+    <div class="brand">
+      <a href="/">혹시 올 사람?</a>
+    </div>
+    <nav>
+      <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+      <ul class="nav-list">
+        <li>
+          <a href="/">홈</a>
+        </li>
+        <li>
+          <a href="#!">조건 검색</a>
+          <ul class="nav-dropdown">
+            <li>
+              <a href="#!" onclick="searchMarkByTime(2); return false;">현재 + 0~2시간</a>
+            </li>
+            <li>
+              <a href="#!" onclick="searchMarkByTime(12); return false;">현재 + 0~12시간</a>
+            </li>
+            <li>
+              <a href="/">모든 약속</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/charge">충전</a>
+        </li>
+        <li>
+          <a href="/my-info">내정보</a>
+        </li>
+        <li>
+          <a th:href="@{${href1}}" th:text="${menu1}">main1</a>
+        </li>
+        <li>
+          <a th:href="@{${href2}}" th:text="${menu2}">main2</a>
+        </li>
+
+        <li>
+          <a href="#!" th:text="|보유 금액 : ${menu3}원|">main3</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<script th:src="|#{topJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>
+</body>
+</html>
+
+<!--Copyright (c) 2023 by Tania Rascia (https://codepen.io/taniarascia/pen/dYvvYv)-->

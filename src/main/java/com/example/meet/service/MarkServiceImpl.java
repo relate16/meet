@@ -4,7 +4,6 @@ import com.example.meet.dto.MarkDto;
 import com.example.meet.entity.Mark;
 import com.example.meet.repository.MarkRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -102,7 +101,7 @@ public class MarkServiceImpl implements MarkService {
 
         MarkDto markDto = new MarkDto(
                 mark.getId(), mark.getUsername(), mark.getGender(),
-                mark.getAge(), mark.getCharacter(), mark.getPlace(), mark.getLat(), mark.getLng(),
+                mark.getAgeRange(), mark.getCharacter(), mark.getPlace(), mark.getLat(), mark.getLng(),
                 startYMD, endYMD,
                 startTime, endTime, mark.getContents(), mark.getParticipant());
         return markDto;
@@ -123,7 +122,7 @@ public class MarkServiceImpl implements MarkService {
             String endYMD = getEndDay(mark);
 
             MarkDto markDto = new MarkDto(
-                    mark.getId(), mark.getUsername(), mark.getGender(), mark.getAge(),
+                    mark.getId(), mark.getUsername(), mark.getGender(), mark.getAgeRange(),
                     mark.getCharacter(), mark.getPlace(), mark.getLat(), mark.getLng(),
                     startYMD, endYMD, startTime, endTime, mark.getContents(), mark.getParticipant()
             );
