@@ -3,13 +3,7 @@
     일정 :
     MapController.java public String showMap(Model model) 재정비하기.
     Test 코드 다 수정하기.
-    meet-map-login.js 따로 만들기 css 포함
 
-    수정 목록 :
-        top 템플릿 조각 추가 및 적용.
-        회원가입 및 로그인 기능 추가
-        로그인이 필요한 페이지 추가
-        팝업 삭제 기능 추가
 */
 
 

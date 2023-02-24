@@ -3,7 +3,14 @@
  * 저장된 마커 map에 표시 등
  * map 기능 설정
  */
-function init(){
+function init(untilTime){
+    // 이전에 추가됐던 마커 초기화 - 조건으로 재검색시 필요함
+    if (layers.length !== 0) {
+        for (const layer of layers) {
+            layer.remove();
+        }
+        layers = [];
+    }
     // Controller에서 MarkDto 객체 가져와 map에 marker 삽입
     $.ajax({
         type : "post",
@@ -11,9 +18,8 @@ function init(){
         async: false,
         contentType: 'application/json',
         dataType: "json",
-        // data: JSON.stringify(),
+        data: JSON.stringify(untilTime),
         success : function (data, status) {
-            console.log("data=" + data);
             for (const markDto of data) {
                 if (markDto.participant == null) {
                     markDto.participant = 0;
@@ -28,21 +34,21 @@ function init(){
         }
     });
 
-    map.on('click', onMapClick)
+    map.on('click', onMapClick);
 }
 
 /**
  * map에 마크 삽입
  */
 function insertMark(markDto) {
-    console.log("markDto = " + JSON.stringify(markDto));
     const markLocation = [markDto.lat, markDto.lng];
-    var marker = L.marker(markLocation).addTo(map);
+    const layer = L.marker(markLocation).addTo(map);
+    layers.push(layer);
     if (markDto.participant == null) {
         markDto.participant = 0;
     }
 
-    marker.bindPopup(
+    layer.bindPopup(
         `<b>이름 : ${markDto.username}</b><br>
         <b>성별 : ${markDto.gender}</b><br>
         <b>나이 : ${markDto.ageRange}</b><br>
@@ -173,12 +179,14 @@ let mapLocation = [37.55559194373907,126.9370528594173];
 
 // map 생성 - leaflet 라이브러리
 // 함수로 묶으면 더 깔끔하려나..싶으나 일단 보류했음
+var layers = [];
 var selectMap = L.map("mapid");
 var map = selectMap.setView(mapLocation,17); // .setView([위도, 경도], 초기 줌레벨)
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
 
 
 $(document).ready(function () {

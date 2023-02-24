@@ -5,7 +5,6 @@
   <title>Meet 등록</title>
   <!--    js 라이브러리의 css    -->
   <link th:href="|#{registMarkCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" rel="stylesheet" type="text/css">
-  <!--  <link href="css/lib/md-time-picker.css" rel="stylesheet">-->
   <link th:href="|#{mdTimePickerCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" rel="stylesheet">
 
   <!--    js 라이브러리    -->
@@ -22,7 +21,6 @@
 <div class="header">
   <div><span th:text="|혹시 올 사람?|"></span></div><br>
   <div th:text="${#temporals.format(localDateTime,'yyyy-MM-dd')}">날짜</div>
-<!--  <div id ="currentTime" name="currentTime" th:text="${#temporals.format(localDateTime,'yyyy-MM-dd')}">날짜</div>-->
 </div>
 <br>
 <div class="login">

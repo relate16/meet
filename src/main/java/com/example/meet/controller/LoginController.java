@@ -2,6 +2,7 @@ package com.example.meet.controller;
 
 import com.example.meet.dto.MemberDto;
 import com.example.meet.dto.MemberSignupDto;
+import com.example.meet.entity.Mark;
 import com.example.meet.entity.Member;
 import com.example.meet.repository.MemberRepository;
 import com.example.meet.service.MemberService;
@@ -29,18 +30,19 @@ public class LoginController {
     private final MemberRepository memberRepository;
     private final MemberService memberService;
 
+    @PostConstruct
+    public void init() {
+        // 로그인 확인용 회원 가입 코드. (임시)
+        MemberSignupDto memberDtoTest = new MemberSignupDto("test", "test", "test", 10, "남", null);
+        Long memberId = memberService.saveMember(memberDtoTest);
+
+    }
     @GetMapping("/login")
     public String getLogin(@ModelAttribute MemberDto memberDto, Model model) {
         model.addAttribute("localDateTime", LocalDateTime.now());
         return "login";
     }
 
-    @PostConstruct
-    public void init() {
-        // 로그인 확인용 회원 가입 코드. (임시)
-        MemberSignupDto memberDtoTest = new MemberSignupDto("test", "test", "test", 10, "남", null);
-        memberService.saveMember(memberDtoTest);
-    }
 
     @PostMapping("/login")
     public String postLogin(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult,
