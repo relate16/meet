@@ -179,9 +179,9 @@ let mapLocation = [37.55559194373907,126.9370528594173];
 
 // map 생성 - leaflet 라이브러리
 // 함수로 묶으면 더 깔끔하려나..싶으나 일단 보류했음
-var layers = [];
-var selectMap = L.map("mapid");
-var map = selectMap.setView(mapLocation,17); // .setView([위도, 경도], 초기 줌레벨)
+let layers = [];
+let selectMap = L.map("mapid");
+let map = selectMap.setView(mapLocation,17); // .setView([위도, 경도], 초기 줌레벨)
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

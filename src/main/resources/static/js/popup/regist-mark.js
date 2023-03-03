@@ -4,9 +4,15 @@
     MapController.java public String showMap(Model model) 재정비하기.
     Test 코드 다 수정하기.
 
+    채팅 실패, 충전 기능 넣어보기.
+    채팅은 https://kadosholy.tistory.com/126 보고 다시 시도해보기. markId를 기준으로 하되 memberId 섞어서 권한 주기.
+
 */
 
 
+/**
+ * 창 닫기
+ */
 function windowClose() {
     window.close();
 }
@@ -83,16 +89,16 @@ function insertMark() {
         dataType: "json",
         data: JSON.stringify(params),
         success: function (data, status) {
+            // data는 markDto
             window.opener.insertMark(data);
-            window.close();
+            window.close()
         },
         error: function (status) {
-            alert(status);
+            alert("마커 생성 중에 문제가 생겼습니다." + status);
             window.close();
         }
     });
 }
-
 
 /**
  * MDTimePicker 시간 선택 초기화
