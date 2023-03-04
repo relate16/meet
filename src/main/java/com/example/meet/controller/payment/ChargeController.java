@@ -3,6 +3,8 @@ package com.example.meet.controller.payment;
 import com.example.meet.dto.MemberDto;
 import com.example.meet.dto.PaymentDto;
 import com.example.meet.entity.Member;
+import com.example.meet.entity.Payment;
+import com.example.meet.repository.PaymentRepository;
 import com.example.meet.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import static com.example.meet.constants.SessionConst.LOGIN_MEMBER;
 public class ChargeController {
 
     private final MemberService memberService;
+    private final PaymentRepository paymentRepository;
 
     @GetMapping("/payment/chargeCash")
     public String payToChargeCash(@SessionAttribute(name = LOGIN_MEMBER) Member member, Model model) {
@@ -34,12 +37,14 @@ public class ChargeController {
      * 결제 성공 후 캐시 충전
      */
     @PostMapping("/payment/chargeCash")
-    public String chargeCash(@SessionAttribute(name = LOGIN_MEMBER) Member member,
+    public void chargeCash(@SessionAttribute(name = LOGIN_MEMBER) Member member,
                              @RequestBody PaymentDto paymentDto) {
         System.out.println("member = " + member);
         System.out.println("paymentDto = " + paymentDto);
         // payment 저장후 Member charge 로직 실행
-
+//
+//        new Payment(paymentDto.getPg())
+//        paymentRepository.save()
 
     }
 }

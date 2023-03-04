@@ -1,6 +1,7 @@
 package com.example.meet.entity;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -38,4 +39,17 @@ public class Payment {
     private String merchantUid;
 
     private String impUid;
+
+    public Payment(String pg, String payMethod, String itemName, Integer amount, Member member,
+                   boolean success, String errorMsg, String merchantUid, String impUid) {
+        this.pg = pg;
+        this.payMethod = payMethod;
+        this.itemName = itemName;
+        this.amount = amount;
+        this.member = member;
+        this.success = success;
+        this.errorMsg = errorMsg;
+        this.merchantUid = merchantUid;
+        this.impUid = impUid;
+    }
 }
