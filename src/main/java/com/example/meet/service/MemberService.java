@@ -9,5 +9,9 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
     Long saveMember(MemberSignupDto memberSignupDto);
 
+    Member getMember(Long memberId);
+
+    Member chargeCash(Long memberId, int chargeAmount);
+
     MemberDto getMemberDto(Long memberId);
 }

@@ -32,4 +32,9 @@ public class Member {
         this.gender = gender;
         this.cash = cash;
     }
+
+    //비지니스 로직
+    public void chargeCash(int chargeAmount) {
+        this.cash += chargeAmount;
+    }
 }

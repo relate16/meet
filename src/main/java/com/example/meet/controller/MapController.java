@@ -6,6 +6,7 @@ import com.example.meet.entity.Member;
 import com.example.meet.repository.MarkQueryRepository;
 import com.example.meet.repository.MarkRepository;
 import com.example.meet.service.MarkService;
+import com.example.meet.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class MapController {
 
     private final MarkRepository markRepository;
     private final MarkService markService;
+    private final MemberService memberService;
     private final MarkQueryRepository markQueryRepository;
 
     @GetMapping("/")
@@ -37,42 +39,28 @@ public class MapController {
             String login = "로그인";
             String signup = "회원가입";
 
-            model.addAttribute("href1", href1); // top.html parameter
-            model.addAttribute("href2", href2); // top.html parameter
-            model.addAttribute("menu1", login); // top.html parameter
-            model.addAttribute("menu2", signup); // top.html parameter
-            model.addAttribute("menu3", cash); // top.html parameter
+            setTopMenu(model, href1, href2, login, signup, cash); // 탑 레이아웃 메뉴 설정
             model.addAttribute("localDateTime", LocalDateTime.now());
             return "meet-map";
         }
 
-        Integer cash = loginMember.getCash();
+        //session에 저장된 loginMember는 로그인할 때 고정 정보이므로
+        //충전 후 변경된 사항이 페이지에 반영하기 위해서는 DB에서 member를 찾아와야 함.
+        Member member = memberService.getMember(loginMember.getId());
+        Integer cash = member.getCash();
         String href1 = "/logout";
         String href2 = "#!";
         String logout = "로그아웃";
         String username = loginMember.getUsername() + "님";
 
-        model.addAttribute("href1", href1); // top.html parameter
-        model.addAttribute("href2", href2); // top.html parameter
-        model.addAttribute("menu1", logout); // top.html parameter
-        model.addAttribute("menu2", username); // top.html parameter
-        model.addAttribute("menu3", cash); // top.html parameter
+        setTopMenu(model, href1, href2, logout, username, cash); // 탑 레이아웃 메뉴 설정
         model.addAttribute("localDateTime", LocalDateTime.now());
         return "meet-map-login";
     }
 
-//    @ResponseBody
-//    @PostMapping("/get-marks")
-//    public List<MarkDto> getMarks() {
-//        markService.deleteMarksAfterNow();
-//        List<Mark> marks = markRepository.findAll();
-//        List<MarkDto> markDtos = markService.getMarkDtos(marks);
-//        return markDtos;
-//    }
     @ResponseBody
     @PostMapping("/get-marks")
     public List<MarkDto> getMarks(@RequestBody(required = false) Integer untilTime) {
-        System.out.println("untilTime = " + untilTime);
         markService.deleteMarksAfterNow();
 
         // 모든 marks 조회일 경우 - 예) localhost:8080/ 요청인 경우
@@ -87,15 +75,6 @@ public class MapController {
         List<MarkDto> markDtos = markService.getMarkDtos(marks);
         return markDtos;
     }
-
-
-//    @PostMapping("/search-marks")
-//    @ResponseBody
-//    public List<MarkDto> searchMarks(@RequestBody Integer untilTime) {
-//        List<Mark> marks = markQueryRepository.searchMarksByTime(untilTime);
-//        List<MarkDto> markDtos = markService.getMarkDtos(marks);
-//        return markDtos;
-//    }
 
     @ResponseBody
     @PostMapping("/update-mark")
@@ -115,6 +94,17 @@ public class MapController {
         }
         markRepository.delete(mark);
         return true;
+    }
+
+
+    // private 메서드
+
+    private void setTopMenu(Model model, String href1, String href2, String menu1, String menu2, Integer menu3) {
+        model.addAttribute("href1", href1); // top.html parameter
+        model.addAttribute("href2", href2); // top.html parameter
+        model.addAttribute("menu1", menu1); // top.html parameter
+        model.addAttribute("menu2", menu2); // top.html parameter
+        model.addAttribute("menu3", menu3); // top.html parameter
     }
 
 }

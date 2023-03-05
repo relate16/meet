@@ -28,6 +28,19 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public Member getMember(Long memberId) {
+        return findMemberById(memberId);
+    }
+
+    @Override
+    @Transactional
+    public Member chargeCash(Long memberId, int chargeAmount) {
+        Member findMember = findMemberById(memberId);
+        findMember.chargeCash(chargeAmount);
+        return findMember;
+    }
+
+    @Override
     public MemberDto getMemberDto(Long memberId) {
         Member member = findMemberById(memberId);
         MemberDto memberDto = new MemberDto(member.getId(), member.getUsername(), member.getPassword(),

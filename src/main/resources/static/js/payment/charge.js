@@ -40,16 +40,16 @@ function requestPay() {
         // pay_method: "card", pg_provider: "kcp", pg_type: "payment", success: false}
         if (rsp.success) {
             console.log("결제 성공");
-            requestCharge(rsp, memberId, itemName, buyerName, chargeAmount);
+            requestCharge(rsp, memberId, pg, itemName, buyerName, chargeAmount);
         } else {
             console.log("결제 실패");
         }
     });
 }
 
-function requestCharge(rsp, memberId, itemName, buyerName, chargeAmount) {
+function requestCharge(rsp, memberId, pg, itemName, buyerName, chargeAmount) {
     const params = {
-        pg: rsp.pg,
+        pg: pg,
         payMethod: rsp.pay_method,
         itemName: itemName,
         amount: chargeAmount,
@@ -65,13 +65,14 @@ function requestCharge(rsp, memberId, itemName, buyerName, chargeAmount) {
         url: "/payment/chargeCash",
         async: false,
         contentType: 'application/json',
-        dataType: "json",
+        dataType: "text",
         data: JSON.stringify(params),
         success: function (data, status) {
+            alert("결제에 성공했습니다. 충전 금액을 확인해주세요.");
             location.href = "/";
         },
         error: function (status) {
-            alert("결제는 됐으나 충전에 실패했습니다. 너무 죄송합니다. 관리자에게 문의해주세요.");
+            alert("결제는 됐으나 충전에 실패했습니다. 죄송합니다. 관리자에게 문의해주세요.");
             location.href = "/";
         }
     });
