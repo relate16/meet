@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="|#{chargeCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|">
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+</head>
+<body>
+
+<div id="form-main">
+    <div id="form-div">
+        <form id="form1" method="post" th:action th:object="${memberDto}">
+            <p class="name">
+                <label>회원명(입력불가) :</label>
+                <input th:field="*{username}" type="text"
+                       class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
+                       style="background-color: #bfaeae" readonly />
+            </p>
+
+            <p class="email">
+                <label>보유 캐시(입력불가) :</label>
+                <input th:field="*{cash}" type="text"
+                       class="validate[required,custom[email]] feedback-input"
+                       style="background-color: #bfaeae" readonly />
+            </p>
+
+            <p class="text">
+                <label>충전할 금액(단위: 원) :</label>
+                <input id="chargeAmount" name="chargeAmount"
+                          class="validate[required,length[6,300]] feedback-input" placeholder="예: 1000"></input>
+            </p>
+
+            <input type="hidden" th:field="*{id}">
+            <div class="submit">
+                <button type="button" th:text="충전" onclick="requestPay()"/>
+                <div class="ease"></div>
+            </div>
+        </form>
+    </div>
+<!--<div class="charge-box">-->
+<!--    <h2>Charge</h2>-->
+<!--    <form id="chargeForm" method="post" th:action th:object="${memberDto}">-->
+<!--        <div class="user-box">-->
+<!--            <input type="text" th:field="*{username}" required="" readonly>-->
+<!--            <label>회원명</label>-->
+<!--        </div>-->
+<!--        <div class="user-box">-->
+<!--            <input type="text" th:field="*{cash}" required="" readonly>-->
+<!--            <label>보유 캐시</label>-->
+<!--        </div>-->
+<!--        <div class="user-box">-->
+<!--            <input type="text" id="chargeAmount" name="chargeAmount" required="">-->
+<!--            <label>결제할 금액</label>-->
+<!--        </div>-->
+<!--        <a href="javascript:void(0);" onclick="requestPay()">-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            충전-->
+<!--        </a>-->
+<!--        <a href="/">-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            취소-->
+<!--        </a>-->
+<!--    </form>-->
+</div>
+<script type="text/javascript" th:src="|#{chargeJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|"></script>
+</body>
+</html>
+
+<!--Copyright (c) 2023 by Rex Kirby (https://codepen.io/rexkirby/pen/kMvYOb)-->

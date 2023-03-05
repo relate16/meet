@@ -1,5 +1,6 @@
 package com.example.meet.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
     @GeneratedValue
@@ -30,5 +31,10 @@ public class Member {
         this.age = age;
         this.gender = gender;
         this.cash = cash;
+    }
+
+    //비지니스 로직
+    public void chargeCash(int chargeAmount) {
+        this.cash += chargeAmount;
     }
 }

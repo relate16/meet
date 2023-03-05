@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public interface MarkService {
-
+    //mark 관련
     /**
      * 유효기간 지난 Mark 삭제
      * 즉, 현재시간보다 endtime이 적은 mark 삭제
@@ -39,13 +39,12 @@ public interface MarkService {
     LocalDateTime checkEndTime(LocalDateTime markStartTime, LocalDateTime markEndTime);
 
 
-
     //markDto 관련
-
     /**
      * Mark mark -> MarkDto markDto
      */
     MarkDto getMarkDto(Mark mark);
+
     /**
      * List<Mark> marks -> List<MarkDto> markDots
      */
