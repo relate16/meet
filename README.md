@@ -29,6 +29,8 @@
   * 회원 기능 구현
     * 회원가입 및 로그인 구현
     * 로그인이 필요한 페이지 적용
+  * 결제 기능 추가
+    * 회원 캐시 충전 기능 적용
     
     
 ### home 화면
@@ -51,6 +53,12 @@
 
 ### marker 조건 검색 기능
 ![leaflet_search](https://user-images.githubusercontent.com/70901928/221106674-a3deddd8-4757-4c3c-8547-493d800658c2.png)
+
+### 캐시 충전 결제 기능
+![충전1](https://user-images.githubusercontent.com/70901928/222941409-a244479d-fe5e-48d1-ab10-e591b393cd80.png)
+![충전2](https://user-images.githubusercontent.com/70901928/222941412-19b8f935-58ce-486e-be7a-025da5fe5db8.png)
+![충전3](https://user-images.githubusercontent.com/70901928/222941414-273976cc-f699-4a92-90c1-a31a04f7c0a7.png)
+![충전4](https://user-images.githubusercontent.com/70901928/222941416-96967530-1afd-4a3b-8eb0-00d0c98ac43f.png)
 
 
 
