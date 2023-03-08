@@ -1,6 +1,7 @@
 package com.example.meet.handler;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Slf4j
+@Component
 public class MultiChatHandler extends TextWebSocketHandler {
     //관련 소스 링크 : https://dev-gorany.tistory.com/212
     // TextWebSocketHandler 설명 링크 : https://supawer0728.github.io/2018/03/30/spring-websocket/

@@ -40,6 +40,9 @@ public class Mark {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private MultiChat multiChat;
+
 
     // 생성자
     public Mark(String username, String gender, String ageRange, String character, String place, String lat, String lng,

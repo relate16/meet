@@ -4,8 +4,8 @@
     MapController.java public String showMap(Model model) 재정비하기.
     Test 코드 다 수정하기.
 
-    채팅 실패, 충전 기능 넣어보기.
     채팅은 https://kadosholy.tistory.com/126 보고 다시 시도해보기. markId를 기준으로 하되 memberId 섞어서 권한 주기.
+    바이너리에 대해 다시 알아보고 MultiChat entity 설정하기.(프로필이미지에 활용해야함)
 
 */
 

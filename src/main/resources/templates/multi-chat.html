@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" th:href="|#{multiChatCss}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|">
+
+  <!--  js 라이브러리-->
+  <script
+          src="https://code.jquery.com/jquery-3.6.3.min.js"
+          integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+          crossorigin="anonymous"></script>
+</head>
+<body>
+
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <div id="wrapper">
   <h3>If you like my post click here!</h3>
@@ -5,13 +20,13 @@
   <h4><a href="http://gyancode.blogspot.in/">Gyancode</a></h4>
 
   <div id="loadgrid">
-    <div class="tabs-left">
+    <div class="tabs-left" th:object="${memberDto}">
       <div id="title_starts" class="chat-title">
         <ul class="nav nav-tabs">
           <span class="search">
             <input type="text" value="Search" class="input_search"></span>
           <li class="active"><a href="">
-            <h3 class="name">Akshay Syal</h3><span class="online"></span>
+            <h3 class="name" th:field="">Akshay Syal</h3><span class="online"></span>
             <h4 class="sub-msg">Lorem Ipsum is simply dummy,</h4>
             <h4 class="min">1 min</h4>
           </a></li>
@@ -41,7 +56,8 @@
             <span class="star icons"><img src="https://akshaysyal.files.wordpress.com/2017/03/icon_star.png" alt="" /></span>
           </span>
           <div class="message-info">
-            <div class="full"><img src="https://akshaysyal.files.wordpress.com/2017/03/profile.jpg" class="dp"><span class="text">Hi...</span>
+            <div class="full"><img src="https://akshaysyal.files.wordpress.com/2017/03/profile.jpg" class="dp">
+              <span class="text">Hi...</span>
               <h5>15 min</h5>
             </div>
             <div class="full snd_row">
@@ -90,5 +106,8 @@
     </div>
   </div>
 </div>
+<script th:src="|#{multiChatJs}?${#temporals.format(localDateTime, 'yyyy-MM-dd HH:mm:ss')}|"></script>
+</body>
+</html>
 
 <!--Copyright (c) 2023 by Akshay (https://codepen.io/syalakshay/pen/PpKOQe)-->

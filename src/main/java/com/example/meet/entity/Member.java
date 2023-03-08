@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
@@ -24,6 +25,9 @@ public class Member {
     private String gender;
 
     private Integer cash;
+
+    @ManyToOne
+    private MultiChat multiChat;
 
     public Member(String username, String password, Integer age, String gender, Integer cash) {
         this.username = username;
