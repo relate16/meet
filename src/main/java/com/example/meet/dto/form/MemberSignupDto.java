@@ -1,4 +1,4 @@
-package com.example.meet.dto;
+package com.example.meet.dto.form;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
 package com.example.meet.dto;
 
+import com.example.meet.upload.domain.UploadFile;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,15 @@ public class MemberDto {
     private String gender;
 
     private Integer cash;
+
+    private UploadFile profileImg;
+
+    public MemberDto(Long id, String username, String password, Integer age, String gender, Integer cash) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.age = age;
+        this.gender = gender;
+        this.cash = cash;
+    }
 }

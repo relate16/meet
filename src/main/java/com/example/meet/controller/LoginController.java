@@ -1,8 +1,7 @@
 package com.example.meet.controller;
 
 import com.example.meet.dto.MemberDto;
-import com.example.meet.dto.MemberSignupDto;
-import com.example.meet.entity.Mark;
+import com.example.meet.dto.form.MemberSignupDto;
 import com.example.meet.entity.Member;
 import com.example.meet.repository.MemberRepository;
 import com.example.meet.service.MemberService;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.time.LocalDateTime;

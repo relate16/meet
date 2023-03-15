@@ -1,6 +1,6 @@
 package com.example.meet.controller;
 
-import com.example.meet.dto.MemberSignupDto;
+import com.example.meet.dto.form.MemberSignupDto;
 import com.example.meet.service.AlertService;
 import com.example.meet.service.MemberService;
 import lombok.RequiredArgsConstructor;

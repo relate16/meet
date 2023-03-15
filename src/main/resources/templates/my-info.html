@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <form th:object="${memberDto}" method="post" enctype="multipart/form-data">
+        <img th:src="@{/img/default.png}" id="profileImg">
+        <label for="storeFilename"
+               style="padding: 6px 10px; background-color:#FF6600; border-radius: 4px;
+               color: white; cursor: pointer;">프로필 사진 수정</label>
+        <input type="file" id="storeFilename" th:value="*{profileImg.storeFilename}" style="display: none" onchange="changeProfileImg()"/><br>
+        <label for="username">이름&nbsp</label><input type="text" th:field="*{username}"><br>
+        <label for="age">나이&nbsp</label><input type="text" th:field="*{age}"><br>
+        <label for="gender">성별&nbsp</label><input type="text" th:field="*{gender}"><br>
+        <label for="cash">보유 캐시&nbsp</label><input type="text" th:field="*{cash}">
+    </form>
+    <script th:src="|#{myInfoJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" ></script>
+</body>
+</html>

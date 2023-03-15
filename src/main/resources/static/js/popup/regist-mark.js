@@ -7,6 +7,13 @@
     채팅은 https://kadosholy.tistory.com/126 보고 다시 시도해보기. markId를 기준으로 하되 memberId 섞어서 권한 주기.
     바이너리에 대해 다시 알아보고 MultiChat entity 설정하기.(프로필이미지에 활용해야함)
 
+    현재 :
+        채팅 만들다가 프로필 사진을 채팅 창에 넣게 하려고
+        파일 첨부 기능 넣고 있는 중
+
+        ajax 사용해서 multipartfile controller에 전송
+        정리는 해뒀음.
+
 */
 
 
