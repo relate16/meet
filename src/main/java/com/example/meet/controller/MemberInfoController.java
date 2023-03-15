@@ -16,6 +16,6 @@ public class MemberInfoController {
 
     @PostMapping("/my-info/updateProfileImg")
     public String updateProfileImg(@ModelAttribute MemberDto memberDto) {
-
+        return "/";
     }
 }
