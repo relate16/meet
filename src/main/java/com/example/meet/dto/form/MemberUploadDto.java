@@ -13,5 +13,9 @@ public class MemberUploadDto {
 
     private String username;
 
+    private String uploadFilename;
+
+    private String storeFilename;
+
     private MultipartFile profileImgFile;
 }

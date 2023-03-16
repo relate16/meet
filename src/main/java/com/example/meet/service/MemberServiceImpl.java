@@ -4,6 +4,7 @@ import com.example.meet.dto.MemberDto;
 import com.example.meet.dto.form.MemberSignupDto;
 import com.example.meet.entity.Member;
 import com.example.meet.repository.MemberRepository;
+import com.example.meet.upload.domain.UploadFile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,15 @@ public class MemberServiceImpl implements MemberService{
         return findMember;
     }
 
+    @Override
+    @Transactional
+    public Member updateProfileImgFile(Long memberId, UploadFile uploadFile) {
+        Member findMember = findMemberById(memberId);
+        findMember.updateProfileImgFile(uploadFile);
+        return findMember;
+    }
+
+    // ↓ dto 관련 메서드
     @Override
     public MemberDto getMemberDto(Long memberId) {
         Member member = findMemberById(memberId);

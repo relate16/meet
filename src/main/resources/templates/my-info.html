@@ -14,14 +14,14 @@
 <body>
     <form th:object="${memberDto}" method="post" enctype="multipart/form-data">
         <img th:src="@{/img/default.png}" id="profileImg">
-        <label for="storeFilename"
+        <label for="uploadFilename"
                style="padding: 6px 10px; background-color:#FF6600; border-radius: 4px;
                color: white; cursor: pointer;">프로필 사진 수정</label>
-        <input type="file" id="storeFilename" th:value="*{profileImg.storeFilename}" style="display: none" onchange="changeProfileImg()"/><br>
-        <label for="username">이름&nbsp</label><input type="text" th:field="*{username}"><br>
-        <label for="age">나이&nbsp</label><input type="text" th:field="*{age}"><br>
-        <label for="gender">성별&nbsp</label><input type="text" th:field="*{gender}"><br>
-        <label for="cash">보유 캐시&nbsp</label><input type="text" th:field="*{cash}">
+        <input type="file" id="uploadFilename" th:value="${memberDto.profileImg?.uploadFilename}" style="display: none" onchange="changeProfileImg()"/><br>
+        <label th:for="username">이름&nbsp</label><input type="text" th:field="*{username}"><br>
+        <label th:for="age">나이&nbsp</label><input type="text" th:field="*{age}"><br>
+        <label th:for="gender">성별&nbsp</label><input type="text" th:field="*{gender}"><br>
+        <label th:for="cash">보유 캐시&nbsp</label><input type="text" th:field="*{cash}">
     </form>
     <script th:src="|#{myInfoJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" ></script>
 </body>

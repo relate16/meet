@@ -1,13 +1,11 @@
 package com.example.meet.entity;
 
+import com.example.meet.upload.domain.UploadFile;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -26,6 +24,9 @@ public class Member {
 
     private Integer cash;
 
+    @Embedded
+    private UploadFile profileImgFile;
+
 
     public Member(String username, String password, Integer age, String gender, Integer cash) {
         this.username = username;
@@ -38,5 +39,9 @@ public class Member {
     //비지니스 로직
     public void chargeCash(int chargeAmount) {
         this.cash += chargeAmount;
+    }
+
+    public void updateProfileImgFile(UploadFile uploadFile) {
+        this.profileImgFile = uploadFile;
     }
 }
