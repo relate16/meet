@@ -11,9 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberUploadDto {
 
-    private Long id;
-
     private String username;
 
-    private MultipartFile multipartFile;
+    private MultipartFile profileImgFile;
 }
