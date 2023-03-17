@@ -12,12 +12,13 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-    <form th:object="${memberDto}" method="post" enctype="multipart/form-data">
+    <form th:object="${memberDto}" method="post" enctype="multipart/form-data" id="myInfoForm">
         <img th:src="@{/img/default.png}" id="profileImg">
         <label for="uploadFilename"
                style="padding: 6px 10px; background-color:#FF6600; border-radius: 4px;
                color: white; cursor: pointer;">프로필 사진 수정</label>
-        <input type="file" id="uploadFilename" th:value="${memberDto.profileImg?.uploadFilename}" style="display: none" onchange="changeProfileImg()"/><br>
+<!--        <input type="file" id="uploadFilename" name="uploadFilename" style="display: none" onchange="changeProfileImg()"/><br>-->
+        <input type="file" id="uploadFilename" name="uploadFilename" onchange="changeProfileImg()"/><br>
         <label th:for="username">이름&nbsp</label><input type="text" th:field="*{username}"><br>
         <label th:for="age">나이&nbsp</label><input type="text" th:field="*{age}"><br>
         <label th:for="gender">성별&nbsp</label><input type="text" th:field="*{gender}"><br>

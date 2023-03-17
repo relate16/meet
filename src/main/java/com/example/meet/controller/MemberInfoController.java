@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -32,14 +33,13 @@ public class MemberInfoController {
     }
 
     @PostMapping("/my-info/updateProfileImg")
-    @ResponseBody
-    public Member updateProfileImg(@ModelAttribute MemberUploadDto memberUploadDto,
+    public Member updateProfileImg(@RequestParam("file") MultipartFile multipartFile,
                                    @SessionAttribute(name = LOGIN_MEMBER) Member member) throws IOException {
-
-        System.out.println("memberUploadDto.getProfileImgFile() = " + memberUploadDto.getProfileImgFile());
-
+        //500오류 뜸 일단 https://cloud0477.tistory.com/122 참고
+        System.out.println("formData = " + multipartFile);
+        
         //이미지 파일 서버단에 저장
-        UploadFile uploadFile = fileStore.storeFile(memberUploadDto.getProfileImgFile());
+        UploadFile uploadFile = fileStore.storeFile(multipartFile);
 
         //이미지 파일 경로 DB에 저장
         Member updateMember = memberService.updateProfileImgFile(member.getId(), uploadFile);
