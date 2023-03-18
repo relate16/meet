@@ -4,6 +4,8 @@
     MapController.java public String showMap(Model model) 재정비하기.
     Test 코드 다 수정하기.
 
+    파일 업로드 구현 다하면 정리해두기. ajax 구글시트에.
+
     채팅은 https://kadosholy.tistory.com/126 보고 다시 시도해보기. markId를 기준으로 하되 memberId 섞어서 권한 주기.
     바이너리에 대해 다시 알아보고 MultiChat entity 설정하기.(프로필이미지에 활용해야함)
 
@@ -11,8 +13,8 @@
         채팅 만들다가 프로필 사진을 채팅 창에 넣게 하려고
         파일 첨부 기능 넣고 있는 중
 
-        ajax 사용해서 multipartfile controller에 전송
-        정리는 해뒀음.
+        프로필 사진 수정으로 파일 선택시
+        uploadFilename까지 controller에 넘겨줬음. 그 다음부분 진행하면 됨.
 
 */
 

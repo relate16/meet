@@ -26,6 +26,6 @@ server:
       tracking-modes: cookie
 
 file:
-  dir: img/
+  dir: C:\dev\meet-profile-img\
 
 

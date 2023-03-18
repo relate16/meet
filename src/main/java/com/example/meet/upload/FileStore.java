@@ -44,7 +44,7 @@ public class FileStore {
      */
     private String createStoreFilename(String uploadFilename) {
         String ext = extractExt(uploadFilename);
-        String storeFilename = UUID.randomUUID() + ext; // storeFilename : ex) UUID.png
+        String storeFilename = UUID.randomUUID() + "." + ext; // storeFilename : ex) UUID.png
         return storeFilename;
     }
 

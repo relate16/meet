@@ -13,7 +13,10 @@
 </head>
 <body>
     <form th:object="${memberDto}" method="post" enctype="multipart/form-data" id="myInfoForm">
-        <img th:src="@{/img/default.png}" id="profileImg">
+        <img th:if="${memberDto.getProfileImg().getStoreFilename() == null}" th:src="@{/img/default.png}">
+        <img th:if="${memberDto.getProfileImg().getStoreFilename() != null}" th:src="|/my-info/images/${memberDto.getProfileImg().getStoreFilename()}|" id="profileImg">
+        <!--springmvc 11222행 참고 -->
+
         <label for="uploadFilename"
                style="padding: 6px 10px; background-color:#FF6600; border-radius: 4px;
                color: white; cursor: pointer;">프로필 사진 수정</label>
