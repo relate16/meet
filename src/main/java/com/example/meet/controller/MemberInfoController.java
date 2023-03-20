@@ -46,13 +46,15 @@ public class MemberInfoController {
 
     @ResponseBody
     @PostMapping("/my-info/update-profile-img")
-    public Member updateProfileImg(@RequestParam("file") MultipartFile multipartFile,
+    public Member updateProfileImg(@ModelAttribute MemberUploadDto memberUploadDto,
                                    @SessionAttribute(name = LOGIN_MEMBER) Member member) throws IOException {
+        System.out.println(" start updateProfileImg");
+        System.out.println("memberUploadDto = " + memberUploadDto);
 
-        //이미지 파일 서버단에 저장
-        UploadFile uploadFile = fileStore.storeFile(multipartFile);
-
-        //이미지 파일 경로 DB에 저장
+        //이미지 파일은 @PostMapping("/my-info/temp-profile-img")단계에서 이미 서버단에 저장
+        //따라서 이미지 파일 경로만 DB에 저장
+        UploadFile uploadFile =
+                new UploadFile(memberUploadDto.getUploadFilename(), memberUploadDto.getStoreFilename());
         Member updateMember = memberService.updateProfileImgFile(member.getId(), uploadFile);
 
         return updateMember;
@@ -75,7 +77,7 @@ public class MemberInfoController {
 
     @ResponseBody
     @PostMapping("/my-info/temp-profile-img")
-    public UploadFile tempProfileImg(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+    public UploadFile tempProfileImg(@RequestParam("profileImgFile") MultipartFile multipartFile) throws IOException {
         return fileStore.storeFile(multipartFile); // 이미지 파일 서버단에 저장
     }
 }

@@ -12,10 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberUploadDto {
 
     private String username;
+    private Integer age;
+    private String gender;
+    private Integer cash;
 
     private String uploadFilename;
 
     private String storeFilename;
 
-    private MultipartFile profileImgFile;
+    private MultipartFile profileImgFile; // 프로필 사진 파일
 }

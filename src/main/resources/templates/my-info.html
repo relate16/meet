@@ -12,21 +12,24 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-    <form th:object="${memberDto}" method="post" enctype="multipart/form-data" id="myInfoForm">
-        <img th:if="${memberDto.getProfileImg().getStoreFilename() == null}" th:src="@{/img/default.png}">
-        <img th:if="${memberDto.getProfileImg().getStoreFilename() != null}" th:src="|/my-info/images/${memberDto.getProfileImg().getStoreFilename()}|" id="profileImg">
-        <!--springmvc 11222행 참고 -->
+<form th:object="${memberDto}" method="post" enctype="multipart/form-data" id="myInfoForm">
+    <img th:if="${memberDto.profileImg.storeFilename == null}" th:src="@{/img/default.png}">
+    <img th:if="${memberDto.profileImg.storeFilename != null}"
+         th:src="|/my-info/images/${memberDto.getProfileImg().getStoreFilename()}|" id="profileImg">
+    <!--springmvc 11222행 참고 -->
 
-        <label for="uploadFilename"
-               style="padding: 6px 10px; background-color:#FF6600; border-radius: 4px;
+    <label for="uploadFilename"
+           style="padding: 6px 10px; background-color:#FF6600; border-radius: 4px;
                color: white; cursor: pointer;">프로필 사진 수정</label>
-<!--        <input type="file" id="uploadFilename" name="uploadFilename" style="display: none" onchange="changeProfileImg()"/><br>-->
-        <input type="file" id="uploadFilename" name="uploadFilename" onchange="changeProfileImg()"/><br>
-        <label th:for="username">이름&nbsp</label><input type="text" th:field="*{username}"><br>
-        <label th:for="age">나이&nbsp</label><input type="text" th:field="*{age}"><br>
-        <label th:for="gender">성별&nbsp</label><input type="text" th:field="*{gender}"><br>
-        <label th:for="cash">보유 캐시&nbsp</label><input type="text" th:field="*{cash}">
-    </form>
-    <script th:src="|#{myInfoJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" ></script>
+    <!--        <input type="file" id="uploadFilename" name="uploadFilename" style="display: none" onchange="changeProfileImg()"/><br>-->
+    <input type="file" id="uploadFilename" name="uploadFilename" style="display: none"
+           onchange="changeProfileImg()"/><br>
+    <label th:for="username">이름&nbsp</label><input type="text" th:field="*{username}"><br>
+    <label th:for="age">나이&nbsp</label><input type="text" th:field="*{age}"><br>
+    <label th:for="gender">성별&nbsp</label><input type="text" th:field="*{gender}"><br>
+    <label th:for="cash">보유 캐시&nbsp</label><input type="text" th:field="*{cash}">
+    <button type="button" onclick="submitForm()">수정</button>
+</form>
+    <script th:inline="javascript" th:src="|#{myInfoJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" ></script>
 </body>
 </html>

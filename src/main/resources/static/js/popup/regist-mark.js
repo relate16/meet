@@ -13,8 +13,9 @@
         채팅 만들다가 프로필 사진을 채팅 창에 넣게 하려고
         파일 첨부 기능 넣고 있는 중
 
-        프로필 사진 수정으로 파일 선택시
-        uploadFilename까지 controller에 넘겨줬음. 그 다음부분 진행하면 됨.
+        file 포함해 다른 json 객체 같이 controller에 넣어주는 중
+        my-info.js에 참고 링크 있고
+        blob 부터 무슨 기능인지 알아보면 됨.
 
 */
 
