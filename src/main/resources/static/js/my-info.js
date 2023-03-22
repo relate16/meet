@@ -1,9 +1,6 @@
 function changeProfileImg() {
 
     const uploadFilename = $('#uploadFilename')[0].files[0].name; // 클라이언트 업로드 파일명
-    // .files + for(const element of profileImgFile) .. 을 사용하지 않고
-    // 그냥 const profileImgFile = $('#storeFilename')[0]
-    // formData.append(profileImgFile) 하면 될듯 일단 profileImgFile 콘솔 값 확인 후 고쳐보기
     // https://2ham-s.tistory.com/307 참고 (formData에 이미지 담기)
 
     const formData = new FormData();
@@ -40,7 +37,7 @@ function submitForm() {
     // 클라이언트 업로드 파일명, URLSearchParams 클래스를 이용해 url 쿼리스트링에서 값 가져옴
     const storeFilename = '$[[memberDto.profileImg.storeFilename]]';
     const profileImgFile = $('#uploadFilename')[0].files[0];
-    // https://2ham-s.tistory.com/307 참고 (formData에 이미지 담기)
+    // https://2ham-s.tistory.com/307 참고 (formData에 이미지 담기, 기본적인 formData 사용 방법)
 
 
     const params = {
@@ -51,7 +48,11 @@ function submitForm() {
         uploadFilename: uploadFilename,
         storeFilename: storeFilename,
     };
-    profileImgFile: formData
+    formData.append("profileImgFile", profileImgFile);
+    formData.append("memberUploadDto",
+        new Blob([JSON.stringify(params)], {type: "application/json"}));
+    console.log("profileImgFile=" + profileImgFile);
+    console.log("params=" + params);
 
     $.ajax({
         url: '/my-info/update-profile-img',

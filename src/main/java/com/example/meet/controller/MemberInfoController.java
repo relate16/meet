@@ -46,8 +46,11 @@ public class MemberInfoController {
 
     @ResponseBody
     @PostMapping("/my-info/update-profile-img")
-    public Member updateProfileImg(@ModelAttribute MemberUploadDto memberUploadDto,
+    public Member updateProfileImg(@RequestPart("memberUploadDto") MemberUploadDto memberUploadDto,
+                                   @RequestPart(value = "profileImgFile", required = false) MultipartFile multipartFile,
                                    @SessionAttribute(name = LOGIN_MEMBER) Member member) throws IOException {
+        // my-info.js에서 profileImgFile 넘어오는 도중 415 오류 생기던 문제 @RequestPart(required=false)로 해결
+        // file과 필드들 같이 넘기는 법 성공시켰으니, 이제 방법과 과정 기록하고, 필요 없는 코드(multipartFile) 천천히 정리할 거 정리하면 될 듯
         System.out.println(" start updateProfileImg");
         System.out.println("memberUploadDto = " + memberUploadDto);
 
