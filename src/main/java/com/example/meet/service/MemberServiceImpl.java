@@ -2,6 +2,7 @@ package com.example.meet.service;
 
 import com.example.meet.dto.MemberDto;
 import com.example.meet.dto.form.MemberSignupDto;
+import com.example.meet.dto.form.MemberUploadDto;
 import com.example.meet.entity.Member;
 import com.example.meet.repository.MemberRepository;
 import com.example.meet.upload.domain.UploadFile;
@@ -29,6 +30,14 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    @Transactional
+    public Member updateMember(Long memberId, Member updateMember) {
+        Member findMember = findMemberById(memberId);
+        findMember.updateMember(updateMember);
+        return findMember;
+    }
+
+    @Override
     public Member getMember(Long memberId) {
         return findMemberById(memberId);
     }
@@ -43,10 +52,20 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     @Transactional
-    public Member updateProfileImgFile(Long memberId, UploadFile uploadFile) {
+    public Member updateProfile(Long memberId, MemberUploadDto memberUploadDto) {
         Member findMember = findMemberById(memberId);
-        findMember.updateProfileImgFile(uploadFile);
-        return findMember;
+
+        UploadFile uploadFile =
+                new UploadFile(memberUploadDto.getUploadFilename(), memberUploadDto.getStoreFilename());
+
+        Member updateMember =
+                new Member(
+                        memberUploadDto.getUsername(), findMember.getPassword(),
+                        memberUploadDto.getAge(), memberUploadDto.getGender(),
+                        memberUploadDto.getCash(), uploadFile
+                );
+
+        return updateMember(findMember.getId(), updateMember);
     }
 
     // ↓ dto 관련 메서드

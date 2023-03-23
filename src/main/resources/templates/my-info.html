@@ -30,6 +30,6 @@
     <label th:for="cash">보유 캐시&nbsp</label><input type="text" th:field="*{cash}">
     <button type="button" onclick="submitForm()">수정</button>
 </form>
-    <script th:inline="javascript" th:src="|#{myInfoJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" ></script>
+    <script th:src="|#{myInfoJs}?${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}|" ></script>
 </body>
 </html>

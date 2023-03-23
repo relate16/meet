@@ -9,13 +9,15 @@
     채팅은 https://kadosholy.tistory.com/126 보고 다시 시도해보기. markId를 기준으로 하되 memberId 섞어서 권한 주기.
     바이너리에 대해 다시 알아보고 MultiChat entity 설정하기.(프로필이미지에 활용해야함)
 
+    @PostMapping("/my-info/temp-profile-img") 프로필 사진 임시 업로드시
+    수정한 이미지는 보여지나 기존에 수정하고 있던 이름 나이 성별 등이 초기화 됨. 손보기
+
     현재 :
         채팅 만들다가 프로필 사진을 채팅 창에 넣게 하려고
         파일 첨부 기능 넣고 있는 중
 
-        file 포함해 다른 json 객체 같이 controller에 넣어주는 중
-        my-info.js에 참고 링크 있고
-        blob 부터 무슨 기능인지 알아보면 됨.
+        profile '수정' 누를 시 form controller에 정확히 전달 완료.
+        @PostMapping("/my-info/update-profile-img") 더 손보면 됨.
 
 */
 
