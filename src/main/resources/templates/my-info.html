@@ -13,8 +13,8 @@
 </head>
 <body>
 <form th:object="${memberDto}" method="post" enctype="multipart/form-data" id="myInfoForm">
-    <img th:if="${memberDto.profileImg.storeFilename == null}" th:src="@{/img/default.png}">
-    <img th:if="${memberDto.profileImg.storeFilename != null}"
+    <img th:if="${memberDto.profileImg == null}" th:src="@{/img/default.png}">
+    <img th:if="${memberDto.profileImg != null}"
          th:src="|/my-info/images/${memberDto.getProfileImg().getStoreFilename()}|" id="profileImg">
     <!--springmvc 11222행 참고 -->
 

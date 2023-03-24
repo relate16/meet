@@ -31,17 +31,15 @@ public class MemberInfoController {
     public String getMemberInfo(@ModelAttribute MemberUploadDto memberUploadDto,
                                 @SessionAttribute(name = LOGIN_MEMBER) Member member,
                                 Model model) {
-        System.out.println("memberDto = " + memberUploadDto);
         MemberDto getMemberDto = memberService.getMemberDto(member.getId());
-        System.out.println("getMemberDto1 = " + getMemberDto);
 
         //'프로필 사진 수정' 버튼 누를 시 임시로 보여줄 img 파일 경로 설정.
         // 임시로 쓸 것이기 때문에 member 에 img 경로 저장x
-        UploadFile uploadFile =
-                new UploadFile(memberUploadDto.getUploadFilename(), memberUploadDto.getStoreFilename());
-        getMemberDto.setProfileImg(uploadFile);
-
-        System.out.println("getMemberDto2 = " + getMemberDto);
+        if (memberUploadDto.getUploadFilename() != null || memberUploadDto.getStoreFilename() != null) {
+            UploadFile uploadFile =
+                    new UploadFile(memberUploadDto.getUploadFilename(), memberUploadDto.getStoreFilename());
+            getMemberDto.setProfileImg(uploadFile);
+        }
 
         model.addAttribute("memberDto", getMemberDto);
         model.addAttribute("localDateTime", LocalDateTime.now());
@@ -50,19 +48,11 @@ public class MemberInfoController {
 
     @ResponseBody
     @PostMapping("/my-info/update-profile-img")
-    public MemberUploadDto updateProfileImg(@RequestPart("memberUploadDto") MemberUploadDto memberUploadDto,
-                                   @RequestPart(value = "profileImgFile", required = false) MultipartFile multipartFile,
+    public MemberUploadDto updateProfileImg(@RequestBody MemberUploadDto memberUploadDto,
                                    @SessionAttribute(name = LOGIN_MEMBER) Member member) {
-        // my-info.js에서 profileImgFile 넘어오는 도중 415 오류 생기던 문제 @RequestPart(required=false)로 해결
-        // file과 필드들 같이 넘기는 법 성공시켰으니, 이제 방법과 과정 기록하고, 필요 없는 코드(multipartFile) 천천히 정리할 거 정리하면 될 듯
-        System.out.println(" start updateProfileImg");
-        System.out.println("memberUploadDto = " + memberUploadDto);
 
         //이미지 파일은 @PostMapping("/my-info/temp-profile-img")단계에서 이미 서버단에 저장
         //따라서 이미지 파일 경로만 DB에 저장
-//        UploadFile uploadFile =
-//                new UploadFile(memberUploadDto.getUploadFilename(), memberUploadDto.getStoreFilename());
-//        Member updateMember = memberService.updateProfile(member.getId(), uploadFile);
         Member updateMember = memberService.updateProfile(member.getId(), memberUploadDto);
 
         MemberUploadDto result = new MemberUploadDto(updateMember.getUsername(), updateMember.getAge(),
@@ -83,7 +73,6 @@ public class MemberInfoController {
     @GetMapping("/my-info/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
         String fullPath = fileStore.getFullPath(filename);
-        System.out.println("fullPath = " + fullPath);
         return new UrlResource("file:" + fullPath);
         // URLResource는 해당 내부 파일에 직접 접근해서 파일을 반환해준다.
         // 보완에 취약해 체크 로직을 넣어주는 게 좋다.

@@ -73,7 +73,7 @@ public class MemberServiceImpl implements MemberService{
     public MemberDto getMemberDto(Long memberId) {
         Member member = findMemberById(memberId);
         MemberDto memberDto = new MemberDto(member.getId(), member.getUsername(), member.getPassword(),
-                member.getAge(), member.getGender(), member.getCash());
+                member.getAge(), member.getGender(), member.getCash(), member.getProfileImgFile());
         return memberDto;
     }
 
